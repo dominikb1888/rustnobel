@@ -1,0 +1,140 @@
+@font-face {
+  font-family: 'flags' ;
+  src: url('static/fonts/flags_color_world.ttf') format('truetype');
+}
+
+body, legend {
+  font-family: 'Jost', sans-serif !important;
+}
+
+h3 {
+  text-transform: uppercase;
+}
+
+#grid {
+  display: grid;
+  grid-template:
+      "a b b b ";
+}
+
+#charts {
+  grid-area: 'a';
+  padding-top: 1em;
+}
+
+#barchart, #barchart2 {
+  display: block;
+  width: 1000px;
+  min-height: 300px;
+}
+
+#filters {
+  grid-area: 'b';
+  padding: 1rem 1rem;
+  padding-top: 4rem;
+}
+
+#selectList fieldset {
+  border: 0;
+  margin: 0 0 0 0;
+  padding: 0 0;
+}
+
+#selectList fieldset {
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+#selectList fieldset div {
+  margin-left: 2px;
+}
+
+#grid {
+  display: grid;
+  grid-template:
+      "a b b b ";
+}
+
+#charts {
+  grid-area: 'a';
+}
+
+#filters {
+  grid-area: 'b';
+}
+
+#barchart svg {
+  overflow: visible;
+}
+
+#barchart rect,
+#barchart path,
+#barchart line {
+  fill: none;
+  stroke-width: 2px;
+  stroke: #333;
+}
+
+#barchart text {
+  font-weight: bolder !important;
+}
+
+#barchart foreignObject div.fib {
+  background-size: contain;
+  background-position: 50%;
+  background-repeat: no-repeat;
+  width: 51px;
+  height: 40px;
+  display: block;
+}
+
+#selectList option.fib {
+  background-size: contain;
+  background-position: 50%;
+  background-repeat: no-repeat;
+}
+
+#selectList input[type=checkbox] {
+  display: none;
+}
+
+#selectList label {
+  display: block;
+  width: 51px;
+  height: 40px;
+  float: left;
+  margin: .2em .2em 0 0;
+
+}
+
+#selectList  input[type=checkbox]:checked + label {
+  border: 3px solid black !important;
+}
+
+#selectList input[type=checkbox]:checked + label span.checkmark {
+  display: inline-block;
+  width: 47px;
+  height: 36px;
+  border:0;
+  position:relative;
+  backdrop-filter: contrast(30%);
+  font-size: 1.5em;
+  color: #333;
+  text-align: center;
+}
+
+#selectList input[type=checkbox]:checked + label span.checkmark:after {
+ content: "\2714";
+}
+
+#selectList label:hover {
+  border-color: red !important;
+  cursor: pointer;
+}
+
+#selectList label span.checkmark:hover {
+  border-color: red !important;
+  cursor: pointer;
+  backdrop-filter: grayscale(0%);
+  content: none;
+}

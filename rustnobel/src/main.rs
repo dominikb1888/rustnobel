@@ -25,12 +25,12 @@ use diesel_async::{
     pooled_connection::AsyncDieselConnectionManager, AsyncPgConnection, RunQueryDsl,
 };
 use std::net::SocketAddr;
+use tower_http::services::ServeDir;
 use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt};
 
 mod db;
 use crate::db::models::{Address, NobelWinner, Organization};
 use crate::db::schema::{address, nobelwinner, organization};
-
 type Pool = bb8::Pool<AsyncDieselConnectionManager<AsyncPgConnection>>;
 
 #[tokio::main]
@@ -52,16 +52,20 @@ async fn main() {
 
     // build our application with some routes
     let app = Router::new()
-        .route("/data", get(get_data))
+        .route("/nobelwinners", get(get_data))
         .route("/", get(get_index))
+        .nest_service("/static/scripts", ServeDir::new("static/scripts"))
+        .nest_service("/static/styles", ServeDir::new("static/styles"))
+        .nest_service("/static/data", ServeDir::new("static/data"))
         .with_state(pool);
-
     // run it with hyper
     let addr = SocketAddr::from(([127, 0, 0, 1], 3000));
     tracing::debug!("listening on {addr}");
     let listener = tokio::net::TcpListener::bind(addr).await.unwrap();
     axum::serve(listener, app).await.unwrap();
 }
+
+// Ensure the app is boxed using `axum::routing::BoxRoute`
 
 // we can also write a custom extractor that grabs a connection from the pool
 // which setup is appropriate depends on your application
@@ -88,8 +92,8 @@ where
 
 #[derive(Template)]
 #[template(path = "index.html")]
-pub struct IndexTemplate<'a> {
-    data: &'a str,
+pub struct IndexTemplate {
+    data: Vec<String>,
 }
 
 async fn get_data(
@@ -106,11 +110,29 @@ async fn get_data(
     Ok(Json(data))
 }
 
-async fn get_index() -> impl IntoResponse {
-    let template = IndexTemplate { data: "hello" };
-    let reply_html = template.render().unwrap();
-    (StatusCode::OK, Html(reply_html).into_response())
+async fn get_index(DatabaseConnection(mut conn): DatabaseConnection) -> impl IntoResponse {
+    match address::table
+        .select(address::country)
+        .distinct()
+        .load::<Option<String>>(&mut conn)
+        .await
+    {
+        Ok(data) => {
+            let codes = data.into_iter().flatten().collect();
+            let template = IndexTemplate { data: codes };
+            let reply_html = template.render().unwrap();
+            (StatusCode::OK, Html(reply_html).into_response())
+        }
+        Err(_err) => {
+            // Handle error, maybe return an error response
+            (
+                StatusCode::INTERNAL_SERVER_ERROR,
+                "Failed to retrieve data".into_response(),
+            )
+        }
+    }
 }
+
 /// Utility function for mapping any error into a `500 Internal Server Error`
 /// response.
 fn internal_error<E>(err: E) -> (StatusCode, String)
