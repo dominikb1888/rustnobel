@@ -49,8 +49,17 @@ class Barchart {
       this.chart.append("g").attr("id","x-axis")
         .attr('transform','translate(0,' + this.height + ')')
         .call(xaxis)
-        .selectAll('text')
-        .text('')
+        .selectAll("text")
+        .remove()
+
+      this.chart.select("#x-axis").selectAll(".tick")
+        .data(this.data)
+        .append("image")
+        .attr('xlink:href', d => "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.0.0/flags/4x3/"+d.key+".svg")
+        .attr("width", 36)
+        .attr("height", 27)
+        .attr("x", -18)
+        .attr("y", 10)
     }
 
     addBars() {
@@ -66,7 +75,7 @@ class Barchart {
         .attr("stroke-width",2)
         .attr("stroke", "white")
 
-     this.chart.append("g").selectAll('foreignObject')
+      this.chart.append("g").selectAll('foreignObject')
         .data(this.data)
         .join('foreignObject')
           .attr("width", 51)
@@ -83,7 +92,8 @@ class Barchart {
     }
 
     getCount(newData) {
-      let countries = newData.map(function ({diedcountrycode}) { if (diedcountrycode) { return diedcountrycode.toLowerCase() } } )
+      console.log(newData)
+      let countries = newData.map(function (list) { if (list[2].country) { return list[2].country.toLowerCase() } } )
       let count = countries.reduce(function (a, b) {
           return (a[b] ? ++a[b] : (a[b] = 1), a);
       }, {});
@@ -92,7 +102,7 @@ class Barchart {
       Object.entries(count).forEach(element => {
         carr.push({'key': element[0].toLowerCase(), 'value': element[1]})
       });
-
+      console.log(carr)
       return carr.sort((a, b) => b.value - a.value)
     }
   }

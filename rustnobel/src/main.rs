@@ -20,14 +20,15 @@ use axum::{
     routing::get,
     Router,
 };
+use diesel::dsl::count;
 use diesel::prelude::*;
 use diesel_async::{
     pooled_connection::AsyncDieselConnectionManager, AsyncPgConnection, RunQueryDsl,
 };
+use serde_json::{json, Value};
 use std::net::SocketAddr;
 use tower_http::services::ServeDir;
 use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt};
-
 mod db;
 use crate::db::models::{Address, NobelWinner, Organization};
 use crate::db::schema::{address, nobelwinner, organization};
@@ -53,6 +54,7 @@ async fn main() {
     // build our application with some routes
     let app = Router::new()
         .route("/nobelwinners", get(get_data))
+        .route("/countries", get(get_countries))
         .route("/", get(get_index))
         .nest_service("/static/scripts", ServeDir::new("static/scripts"))
         .nest_service("/static/styles", ServeDir::new("static/styles"))
@@ -110,9 +112,37 @@ async fn get_data(
     Ok(Json(data))
 }
 
+async fn get_countries(
+    DatabaseConnection(mut conn): DatabaseConnection,
+) -> Result<Json<Value>, (StatusCode, String)> {
+    let countries = address::table
+        .group_by(address::country)
+        .select((address::country, count(address::id).nullable()))
+        .filter(address::address_type.eq("organization"))
+        .order(address::country)
+        .load::<(Option<String>, Option<i64>)>(&mut conn)
+        .await
+        .map_err(internal_error)?;
+
+    let json_result = serde_json::to_value(
+        &countries
+            .into_iter()
+            .filter_map(|(country, count)| {
+                // Handling Option values if necessary (due to nullable columns)
+                country.and_then(|c| count.map(|ct| json!({"key": c, "value": ct})))
+            })
+            .collect::<Vec<_>>(),
+    )
+    .map_err(internal_error)?;
+
+    Ok(Json(json_result))
+}
+
 async fn get_index(DatabaseConnection(mut conn): DatabaseConnection) -> impl IntoResponse {
     match address::table
         .select(address::country)
+        .filter(address::address_type.eq("organization"))
+        .order(address::country)
         .distinct()
         .load::<Option<String>>(&mut conn)
         .await

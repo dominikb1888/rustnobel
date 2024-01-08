@@ -9,7 +9,7 @@ function getCheckedValues() {
 }
 
 function filterData(values, data) {
-  let result = data.filter(function (d) { if (d.diedcountrycode) { return values.includes(d.diedcountrycode.toLowerCase())}})
+  let result = data.filter(function (d) { if (d[2].country) { return values.includes(d[2].country.toLowerCase())}})
   return result.filter(d => d !== undefined)
 }
 
@@ -26,19 +26,19 @@ async function getJSONData(path) {
 async function processData() {
   try {
     var data = await getJSONData('/nobelwinners', {method:"GET"})
+    console.log(data)
     var basemap = await getJSONData('/static/data/world-110m.geojson')
     var selected_data = filterData(getCheckedValues(), data )
     var mychart = new Barchart({
       'element': '#barchart',
       'data': selected_data,
     });
-
+    console.log(selected_data)
     var mymap = new WorldMap({
       'element': '#map',
       'data': selected_data,
       'basemap': basemap,
     });
-
     d3.selectAll('input[type=checkbox]').on('change', function() {
       selected_data = filterData(getCheckedValues(), data)
       mychart.setData(selected_data);

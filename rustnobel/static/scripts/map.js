@@ -61,13 +61,15 @@ class WorldMap {
         .append("circle")
         .merge(circles)
         .attr("transform", d => {
-          const coords = d.geo_point_2d ? Object.values(d.geo_point_2d) : [0, 0];
+          const prep = d[2].coordinates.replace("(","[").replace(")","]").replace(/'/g, '"').replace("None",'"None"')
+          const parsed = JSON.parse(prep)
+          const coords = parsed.coordinates ? parsed.coordinates : [0, 0];
           return `translate(${this.projection(coords)})`;
         })
         .attr("r", 5)
         .style("fill", "red");
     }
-
+    
     setData(newData) {
       this.data = newData;
       this.updateMarkers(); // Call updateMarkers() to update markers when data changes

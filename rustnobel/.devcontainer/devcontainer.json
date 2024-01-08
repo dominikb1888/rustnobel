@@ -1,0 +1,13 @@
+{
+  "name": "Rust with PostgreSQL",
+  "image": "rust:latest",
+  "extensions": ["vscoss.vscode-ansible"],
+  "settings": {
+    "terminal.integrated.shell.linux": "/bin/bash"
+  },
+  "dockerComposeFile": "../docker-compose.yml", // Adjusted path to the parent directory
+  "service": "app",
+  "forwardPorts": [5432, 8080], // PostgreSQL default port and 8080 for your app
+  "workspaceMount": "source=/Home/parallels/Code/rustnobel,target=/workspace,type=bind,consistency=cached"
+}
+

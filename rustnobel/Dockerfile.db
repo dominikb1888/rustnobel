@@ -1,0 +1,15 @@
+FROM postgres
+
+# Override default values if provided during the build
+ARG POSTGRES_USER
+ARG POSTGRES_PASSWORD
+ARG POSTGRES_DB
+
+# Set environment variables for PostgreSQL from build arguments
+ENV POSTGRES_USER=${POSTGRES_USER}
+ENV POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+ENV POSTGRES_DB=${POSTGRES_DB}
+
+# Expose PostgreSQL default port
+EXPOSE 5432
+
