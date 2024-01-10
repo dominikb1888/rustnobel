@@ -1,27 +1,27 @@
 # Stage 1: Build Rust application
-FROM rust:latest as builder
+FROM rust:1.74.0 as builder
+WORKDIR /usr/src
 
-# Set the working directory
-WORKDIR /app
+# Download the target for static linking.
+RUN rustup target add x86_64-unknown-linux-musl
 
-# Copy the Rust project files
-COPY . .
-
-# Build your Rust application
+# Create a dummy project and build the app's dependencies.
+# If the Cargo.toml or Cargo.lock files have not changed,
+# we can use the docker build cache and skip these (typically slow) steps.
+RUN USER=root cargo new rustnobel
+WORKDIR /usr/src/rustnobel
+COPY Cargo.toml Cargo.lock ./
 RUN cargo build --release
 
-# Stage 2: Create an extremely minimal container
-FROM debian:bookworm-slim
-
-# Set the working directory
-WORKDIR /app
-
-# Copy the compiled Rust application from the builder stage
-COPY --from=builder /app/target/release/rustnobel .
-COPY static ./static
+# Copy the source and build the application.
+COPY src ./src
 COPY templates ./templates
+RUN cargo install --target x86_64-unknown-linux-musl --path .
 
-# Set the entry point for your app
+# Copy the statically-linked binary into a scratch container.
+FROM scratch
+COPY --from=builder /usr/local/cargo/bin/rustnobel .
+COPY static ./static
+USER 1000
 CMD ["./rustnobel"]
-
 EXPOSE 8080

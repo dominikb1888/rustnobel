@@ -1,4 +1,4 @@
-FROM postgres:bookworm
+FROM postgres:16.1-alpine
 
 ADD ./nobeldata.sql /docker-entrypoint-initdb.d
 
