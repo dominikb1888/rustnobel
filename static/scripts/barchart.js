@@ -2,6 +2,7 @@ class Barchart {
     constructor(opts) {
       this.data = this.getCount(opts.data);
       this.element = document.querySelector(opts.element);
+
       this.draw()
     }
 

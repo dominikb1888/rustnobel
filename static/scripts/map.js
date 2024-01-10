@@ -9,14 +9,15 @@ class WorldMap {
       this.landStroke = "#FCF5E9";
       this.markerColor = "#E26F99";
 
-      this.chartWidth = 1000;
-      this.chartHeight = 500;
-
       this.draw();
     }
 
     draw() {
       const mapHolder = d3.select(this.element);
+      const boundingRect = mapHolder.node().getBoundingClientRect();
+      this.chartWidth = boundingRect.width;
+      this.chartHeight = boundingRect.height;
+
       this.mymap = mapHolder.append('svg')
         .attr("title", "Map")
         .attr('width', this.chartWidth)
@@ -69,7 +70,7 @@ class WorldMap {
         .attr("r", 5)
         .style("fill", "red");
     }
-    
+
     setData(newData) {
       this.data = newData;
       this.updateMarkers(); // Call updateMarkers() to update markers when data changes
