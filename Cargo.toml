@@ -12,7 +12,7 @@ async-trait = "0.1.75"
 axum = { version = "0.7.2", features = ["macros"] }
 bb8 = "0.8.1"
 chrono = { version = "0.4.31", features = ["serde"] }
-diesel = { version = "2.1.4", features = ["sqlite", "chrono", "r2d2"] }
+diesel = { version = "2.1.4", features = ["chrono", "r2d2"] }
 diesel-async = { version = "0.4.1", features = ["postgres", "bb8"] }
 geo = "0.27.0"
 http = "1.0.0"

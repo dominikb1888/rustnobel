@@ -9,7 +9,7 @@ services:
     volumes:
       - .:/workspace
     ports:
-      - "5432:5432" # Forward PostgreSQL port
+      - "8080:8080" # Forward PostgreSQL port
     depends_on:
       - db
     environment:

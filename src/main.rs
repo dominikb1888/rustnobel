@@ -45,7 +45,7 @@ async fn main() {
         .init();
 
     // let db_url = std::env::var("DATABASE_URL").unwrap();
-    let db_url = "postgres://postgres:4pTH2WWb@localhost/nobeldata";
+    let db_url = "postgres://postgres:4pTH2WWb@db/nobeldata";
 
     // set up connection pool
     let config = AsyncDieselConnectionManager::<diesel_async::AsyncPgConnection>::new(db_url);
@@ -61,7 +61,7 @@ async fn main() {
         .nest_service("/static/data", ServeDir::new("static/data"))
         .with_state(pool);
     // run it with hyper
-    let addr = SocketAddr::from(([127, 0, 0, 1], 3000));
+    let addr = SocketAddr::from(([0, 0, 0, 0], 8080));
     tracing::debug!("listening on {addr}");
     let listener = tokio::net::TcpListener::bind(addr).await.unwrap();
     axum::serve(listener, app).await.unwrap();

@@ -1,4 +1,6 @@
-FROM postgres
+FROM postgres:bookworm
+
+ADD ./nobeldata.sql /docker-entrypoint-initdb.d
 
 # Override default values if provided during the build
 ARG POSTGRES_USER
