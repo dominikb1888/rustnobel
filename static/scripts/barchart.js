@@ -16,7 +16,7 @@ class Barchart {
 
       const svg = chartHolder.append("svg")
         .attr("width", this.width)
-        .attr("height", this.height)
+        .attr("height", this.height + 50)
 
       this.chart = svg
         .append("g").classed('chart', true)
@@ -57,10 +57,10 @@ class Barchart {
         .data(this.data)
         .append("image")
         .attr('xlink:href', d => "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.0.0/flags/4x3/"+d.key+".svg")
-        .attr("width", 36)
-        .attr("height", 27)
-        .attr("x", -18)
-        .attr("y", 10)
+        .attr("width", 18)
+        .attr("height", 13)
+        .attr("x", -9)
+        .attr("y", 5)
     }
 
     addBars() {
