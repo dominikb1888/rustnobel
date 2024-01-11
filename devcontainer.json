@@ -2,6 +2,6 @@
   "name": "rustnobel",
   "dockerComposeFile": "docker-compose.yml",
   "service": "app",
-  "forwardPorts": [5432,8080],
+  "forwardPorts": [8080.5432],
   "workspaceFolder": "/workspace"
 }
