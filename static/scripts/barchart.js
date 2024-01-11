@@ -93,7 +93,6 @@ class Barchart {
     }
 
     getCount(newData) {
-      console.log(newData)
       let countries = newData.map(function (list) { if (list[2].country) { return list[2].country.toLowerCase() } } )
       let count = countries.reduce(function (a, b) {
           return (a[b] ? ++a[b] : (a[b] = 1), a);
@@ -103,7 +102,6 @@ class Barchart {
       Object.entries(count).forEach(element => {
         carr.push({'key': element[0].toLowerCase(), 'value': element[1]})
       });
-      console.log(carr)
       return carr.sort((a, b) => b.value - a.value)
     }
   }

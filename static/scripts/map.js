@@ -14,7 +14,7 @@ class WorldMap {
 
     draw() {
       const mapHolder = d3.select(this.element);
-      const boundingRect = mapHolder.node().getBoundingClientRect();
+      const boundingRect = mapHolder.node().parentNode.getBoundingClientRect();
       this.chartWidth = boundingRect.width;
       this.chartHeight = boundingRect.height;
 
