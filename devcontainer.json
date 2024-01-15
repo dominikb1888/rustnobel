@@ -3,5 +3,6 @@
   "dockerComposeFile": "docker-compose.yml",
   "service": "app",
   "forwardPorts": [8080,5432],
-  "workspaceFolder": "/workspace"
+  "workspaceFolder": "/workspace",
+  "postStartCommand": "docker compose up --build"
 }
