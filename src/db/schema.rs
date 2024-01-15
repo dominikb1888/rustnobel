@@ -8,7 +8,8 @@ diesel::table! {
         zip -> Nullable<Text>,
         city -> Nullable<Text>,
         country -> Nullable<Text>,
-        coordinates -> Nullable<Text>,
+        lat -> Nullable<Double>,
+        lon -> Nullable<Double>,
         person_id -> Nullable<BigInt>,
     }
 }

@@ -21,7 +21,8 @@ pub struct Address {
     pub zip: Option<String>,
     pub city: Option<String>,
     pub country: Option<String>,
-    pub coordinates: Option<String>,
+    pub lat: Option<f64>,
+    pub lon: Option<f64>,
     pub person_id: Option<i64>,
 }
 

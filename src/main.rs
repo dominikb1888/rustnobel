@@ -98,19 +98,34 @@ pub struct IndexTemplate {
     data: Vec<String>,
 }
 
+
+
+
+
+
+
+
 async fn get_data(
     DatabaseConnection(mut conn): DatabaseConnection,
-) -> Result<Json<Vec<(NobelWinner, Organization, Address)>>, (StatusCode, String)> {
-    // Use Diesel's query builder to perform queries
+) -> Result<Json<Vec<(NobelWinner, Organization, Address, Address)>>, (StatusCode, String)> {
+    let addresses1 = diesel::alias!(address as address1);
     let data = nobelwinner::table
         .inner_join(organization::table.on(nobelwinner::org_id.eq(organization::id)))
         .inner_join(address::table.on(organization::address_id.eq(address::id)))
-        .load::<(NobelWinner, Organization, Address)>(&mut conn)
-        .await
-        .map_err(internal_error)?;
+        .inner_join(addresses1.on(nobelwinner::id.eq(addresses1.field(address::person_id))))
+    .load::<(NobelWinner, Organization, Address, Address)>(&mut conn)
+    .await
+    .map_err(internal_error)?;
 
     Ok(Json(data))
 }
+
+
+
+
+
+
+
 
 async fn get_countries(
     DatabaseConnection(mut conn): DatabaseConnection,

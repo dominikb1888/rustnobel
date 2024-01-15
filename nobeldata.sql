@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 16.1 (Debian 16.1-1.pgdg120+1)
--- Dumped by pg_dump version 16.1 (Debian 16.1-1.pgdg120+1)
+-- Dumped from database version 16.1
+-- Dumped by pg_dump version 16.1
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -43,8 +43,9 @@ CREATE TABLE public.address (
     zip text,
     city text,
     country text,
-    coordinates text,
-    person_id bigint
+    person_id bigint,
+    lat double precision,
+    lon double precision
 );
 
 
@@ -97,935 +98,935 @@ COPY public.__diesel_schema_migrations (version, run_on) FROM stdin;
 -- Data for Name: address; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.address (id, address_type, street, zip, city, country, coordinates, person_id) FROM stdin;
-1	organization	\N	\N	Tsukuba	JP	{'bbox': None, 'type': 'Point', 'coordinates': (137.9799595076, 37.5526225906)}	\N
-2	bornaddress	\N	\N	Nagoya	JP	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	1
-3	organization	\N	\N	Stanford CA	US	{'bbox': None, 'type': 'Point', 'coordinates': (-112.4943339159, 45.6875333395)}	\N
-442	diedaddress	\N	\N	Lanzarote	ES	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	380
-523	bornaddress	\N	\N	Parral	CL	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	473
-563	bornaddress	\N	\N	Mokpo	KR	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	520
-4	bornaddress	\N	\N	Little Falls MN	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	2
-5	organization	\N	\N	Göttingen	DE	{'bbox': None, 'type': 'Point', 'coordinates': (10.3817108727, 51.1062734358)}	\N
-6	bornaddress	\N	\N	Arad	RO	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	3
-743	diedaddress	\N	\N	Sens	FR	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	760
-7	organization	\N	\N	St. Petersburg	RU	{'bbox': None, 'type': 'Point', 'coordinates': (96.6934557675, 61.9843417375)}	\N
-8	bornaddress	\N	\N	Ryazan	RU	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	5
-9	diedaddress	\N	\N	Leningrad	RU	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	5
-10	organization	\N	\N	London	GB	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	\N
-11	bornaddress	\N	\N	Bristol	GB	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	6
-12	diedaddress	\N	\N	Cambridge	GB	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	6
-13	organization	\N	\N	Rochester NY	US	{'bbox': None, 'type': 'Point', 'coordinates': (-112.4943339159, 45.6875333395)}	\N
-14	bornaddress	\N	\N	Ashland NH	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	7
-15	organization	\N	\N	Canberra	AU	{'bbox': None, 'type': 'Point', 'coordinates': (134.491117773, -25.7323831126)}	\N
-16	bornaddress	\N	\N	Melbourne	AU	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	8
-17	diedaddress	\N	\N	Contra	CH	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	8
-18	bornaddress	\N	\N	Marietta OH	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	10
-19	diedaddress	\N	\N	Evanston IL	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	10
-20	bornaddress	\N	\N	Fürth	DE	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	11
-21	bornaddress	\N	\N	Mårbacka	SE	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	12
-22	bornaddress	\N	\N	Hämeenkyrö	FI	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	13
-23	diedaddress	\N	\N	Helsinki	FI	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	13
-24	bornaddress	\N	\N	Tananarive (now Antananarivo)	MG	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	14
-25	diedaddress	\N	\N	Paris	FR	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	14
-26	organization	\N	\N	New Haven CT	US	{'bbox': None, 'type': 'Point', 'coordinates': (-112.4943339159, 45.6875333395)}	\N
-27	bornaddress	\N	\N	Champaign IL	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	15
-28	bornaddress	\N	\N	Uddingston	GB	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	16
-29	bornaddress	\N	\N	Bogotá	CO	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	17
-30	organization	\N	\N	Chicago IL	US	{'bbox': None, 'type': 'Point', 'coordinates': (-112.4943339159, 45.6875333395)}	\N
-31	bornaddress	\N	\N	East Orange NJ	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	18
-32	organization	\N	\N	Boston MA	US	{'bbox': None, 'type': 'Point', 'coordinates': (-112.4943339159, 45.6875333395)}	\N
-33	bornaddress	\N	\N	New York NY	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	19
-34	organization	\N	\N	Cambridge MA	US	{'bbox': None, 'type': 'Point', 'coordinates': (-112.4943339159, 45.6875333395)}	\N
-35	organization	\N	\N	Uppsala	SE	{'bbox': None, 'type': 'Point', 'coordinates': (16.7542843545, 62.777378402)}	\N
-36	bornaddress	\N	\N	Örebro	SE	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	23
-37	diedaddress	\N	\N	Stockholm	SE	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	23
-38	organization	\N	\N	Halle	DE	{'bbox': None, 'type': 'Point', 'coordinates': (10.3817108727, 51.1062734358)}	\N
-39	bornaddress	\N	\N	Hamburg	DE	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	24
-40	diedaddress	\N	\N	Berlin	DE	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	24
-41	organization	\N	\N	Providence RI	US	{'bbox': None, 'type': 'Point', 'coordinates': (-112.4943339159, 45.6875333395)}	\N
-42	organization	\N	\N	Rüschlikon	CH	{'bbox': None, 'type': 'Point', 'coordinates': (8.2159126615, 46.7990859221)}	\N
-43	bornaddress	\N	\N	Neuenkirchen	DE	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	26
-44	organization	\N	\N	Nancy	FR	{'bbox': None, 'type': 'Point', 'coordinates': (-2.7544221495, 42.1820291785)}	\N
-45	bornaddress	\N	\N	Cherbourg	FR	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	27
-46	diedaddress	\N	\N	Lyon	FR	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	27
-47	bornaddress	\N	\N	Budapest	HU	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	28
-48	diedaddress	\N	\N	Freiburg im Breisgau	DE	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	28
-49	organization	\N	\N	Oxford	GB	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	\N
-50	bornaddress	\N	\N	Vienna	AT	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	30
-51	organization	\N	\N	Urbana IL	US	{'bbox': None, 'type': 'Point', 'coordinates': (-112.4943339159, 45.6875333395)}	\N
-52	bornaddress	\N	\N	Sidney OH	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	31
-53	bornaddress	\N	\N	Bayonne	FR	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	33
-54	bornaddress	\N	\N	Johannesburg	ZA	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	34
-55	diedaddress	\N	\N	Cape Town	ZA	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	34
-56	bornaddress	\N	\N	Salinas CA	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	35
-57	bornaddress	\N	\N	Aracataca	CO	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	36
-58	diedaddress	\N	\N	Mexico City	MX	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	36
-59	bornaddress	\N	\N	Pinsk	BY	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	37
-60	organization	\N	\N	Fairfax VA	US	{'bbox': None, 'type': 'Point', 'coordinates': (-112.4943339159, 45.6875333395)}	\N
-61	bornaddress	\N	\N	Murfreesboro TN	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	38
-62	diedaddress	\N	\N	Blacksburg VA	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	38
-63	organization	\N	\N	Santa Barbara CA	US	{'bbox': None, 'type': 'Point', 'coordinates': (-112.4943339159, 45.6875333395)}	\N
-64	bornaddress	\N	\N	Weimar	DE	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	39
-65	bornaddress	\N	\N	Neston	GB	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	40
-66	organization	\N	\N	Batavia IL	US	{'bbox': None, 'type': 'Point', 'coordinates': (-112.4943339159, 45.6875333395)}	\N
-67	diedaddress	\N	\N	Rexburg ID	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	41
-68	organization	\N	\N	Toulouse	FR	{'bbox': None, 'type': 'Point', 'coordinates': (-2.7544221495, 42.1820291785)}	\N
-69	bornaddress	\N	\N	Carcassonne	FR	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	42
-70	bornaddress	\N	\N	Briesen (now Wąbrzeźno)	PL	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	43
-71	diedaddress	\N	\N	Muskau	DE	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	43
-72	organization	\N	\N	Bar Harbor ME	US	{'bbox': None, 'type': 'Point', 'coordinates': (-112.4943339159, 45.6875333395)}	\N
-73	bornaddress	\N	\N	Bradford MA	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	45
-74	organization	\N	\N	Prague	CZ	{'bbox': None, 'type': 'Point', 'coordinates': (15.3140847769, 49.7324459146)}	\N
-75	bornaddress	\N	\N	Strehlen (now Strzelin)	PL	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	47
-76	diedaddress	\N	\N	Bad Homburg vor der Höhe	DE	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	47
-77	organization	\N	\N	Copenhagen	DK	{'bbox': None, 'type': 'Point', 'coordinates': (10.0502290036, 55.9659213307)}	\N
-78	bornaddress	\N	\N	Grenå	DK	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	48
-79	organization	\N	\N	Leiden	NL	{'bbox': None, 'type': 'Point', 'coordinates': (5.2215917713, 52.0724168637)}	\N
-80	bornaddress	\N	\N	Semarang	ID	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	49
-81	organization	\N	\N	Brooklyn NY	US	{'bbox': None, 'type': 'Point', 'coordinates': (-112.4943339159, 45.6875333395)}	\N
-82	bornaddress	\N	\N	Charleston SC	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	50
-83	diedaddress	\N	\N	Seattle WA	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	50
-84	organization	\N	\N	Chapel Hill NC	US	{'bbox': None, 'type': 'Point', 'coordinates': (-112.4943339159, 45.6875333395)}	\N
-85	bornaddress	\N	\N	Savur	TR	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	51
-86	bornaddress	\N	\N	Beshasha	ET	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	52
-87	organization	\N	\N	Walnut Creek CA	US	{'bbox': None, 'type': 'Point', 'coordinates': (-112.4943339159, 45.6875333395)}	\N
-88	bornaddress	\N	\N	Pasadena CA	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	54
-89	organization	\N	\N	Manchester	GB	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	\N
-90	bornaddress	\N	\N	Madison WI	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	56
-91	organization	\N	\N	Murray Hill NJ	US	{'bbox': None, 'type': 'Point', 'coordinates': (-112.4943339159, 45.6875333395)}	\N
-92	bornaddress	\N	\N	Amoy	CN	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	57
-93	bornaddress	\N	\N	Tokyo	JP	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	59
-94	diedaddress	\N	\N	Osaka	JP	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	59
-95	bornaddress	\N	\N	Enterprise OR	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	60
-96	diedaddress	\N	\N	Wilmette IL	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	60
-97	organization	\N	\N	Kingston	CA	{'bbox': None, 'type': 'Point', 'coordinates': (-98.2945373672, 61.3765600742)}	\N
-98	bornaddress	\N	\N	Sydney	CA	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	62
-99	organization	\N	\N	Bern	CH	{'bbox': None, 'type': 'Point', 'coordinates': (8.2159126615, 46.7990859221)}	\N
-100	organization	\N	\N	Kiel	DE	{'bbox': None, 'type': 'Point', 'coordinates': (10.3817108727, 51.1062734358)}	\N
-101	bornaddress	\N	\N	Hanover	DE	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	64
-102	diedaddress	\N	\N	Philadelphia PA	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	64
-103	bornaddress	\N	\N	Lochfield	GB	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	65
-104	bornaddress	\N	\N	Adelaide	AU	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	66
-105	organization	\N	\N	Buenos Aires	AR	{'bbox': None, 'type': 'Point', 'coordinates': (-65.1782708231, -35.3874753432)}	\N
-106	organization	\N	\N	Rochester MN	US	{'bbox': None, 'type': 'Point', 'coordinates': (-112.4943339159, 45.6875333395)}	\N
-107	bornaddress	\N	\N	Pittsburgh PA	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	68
-108	diedaddress	\N	\N	Ocho Rios	JM	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	68
-109	diedaddress	\N	\N	Great Barrington MA	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	69
-110	organization	\N	\N	Ithaca NY	US	{'bbox': None, 'type': 'Point', 'coordinates': (-112.4943339159, 45.6875333395)}	\N
-111	bornaddress	\N	\N	Rye NY	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	72
-112	bornaddress	\N	\N	Eastbourne	GB	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	73
-113	diedaddress	\N	\N	Brighton	GB	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	73
-114	organization	\N	\N	Heidelberg	DE	{'bbox': None, 'type': 'Point', 'coordinates': (10.3817108727, 51.1062734358)}	\N
-115	diedaddress	\N	\N	Austin TX	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	76
-116	organization	\N	\N	Ottawa	CA	{'bbox': None, 'type': 'Point', 'coordinates': (-98.2945373672, 61.3765600742)}	\N
-117	organization	\N	\N	Bethesda MD	US	{'bbox': None, 'type': 'Point', 'coordinates': (-112.4943339159, 45.6875333395)}	\N
-118	bornaddress	\N	\N	Monessen PA	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	78
-119	diedaddress	\N	\N	Randallstown MD	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	78
-120	bornaddress	\N	\N	Neudorf	CA	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	80
-121	organization	\N	\N	Medford MA	US	{'bbox': None, 'type': 'Point', 'coordinates': (-112.4943339159, 45.6875333395)}	\N
-122	diedaddress	\N	\N	Winchester MA	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	81
-123	bornaddress	\N	\N	Lansing IA	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	82
-124	bornaddress	\N	\N	Falmouth KY	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	83
-125	bornaddress	\N	\N	Stavanger	NO	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	84
-126	diedaddress	\N	\N	Oslo	NO	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	84
-127	bornaddress	\N	\N	Nantes	FR	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	85
-128	bornaddress	\N	\N	Moscow	RU	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	86
-129	bornaddress	\N	\N	Klerksdorp	ZA	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	87
-130	organization	\N	\N	Princeton NJ	US	{'bbox': None, 'type': 'Point', 'coordinates': (-112.4943339159, 45.6875333395)}	\N
-131	bornaddress	\N	\N	Bluefield WV	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	88
-132	diedaddress	\N	\N	New Jersey NJ	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	88
-133	bornaddress	\N	\N	Changchun	CN	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	89
-134	diedaddress	\N	\N	Shenyang	CN	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	89
-135	organization	\N	\N	Hertfordshire	GB	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	\N
-136	bornaddress	\N	\N	Vyartsilya Karelia	RU	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	94
-137	organization	\N	\N	Worcester MA	US	{'bbox': None, 'type': 'Point', 'coordinates': (-112.4943339159, 45.6875333395)}	\N
-138	organization	\N	\N	Leipzig	DE	{'bbox': None, 'type': 'Point', 'coordinates': (10.3817108727, 51.1062734358)}	\N
-139	bornaddress	\N	\N	Würzburg	DE	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	98
-140	diedaddress	\N	\N	Munich	DE	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	98
-141	bornaddress	\N	\N	Rymanow	PL	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	99
-142	organization	\N	\N	Geneva	CH	{'bbox': None, 'type': 'Point', 'coordinates': (8.2159126615, 46.7990859221)}	\N
-143	bornaddress	\N	\N	the Hague	NL	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	100
-144	bornaddress	\N	\N	Henan	CN	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	101
-145	organization	\N	\N	Washington D.C.	US	{'bbox': None, 'type': 'Point', 'coordinates': (-112.4943339159, 45.6875333395)}	\N
-146	bornaddress	\N	\N	Genoa	IT	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	103
-147	diedaddress	\N	\N	La Jolla CA	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	103
-206	diedaddress	\N	\N	Rome	IT	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	143
-148	organization	\N	\N	Richmond VA	US	{'bbox': None, 'type': 'Point', 'coordinates': (-112.4943339159, 45.6875333395)}	\N
-149	organization	\N	\N	Argonne IL	US	{'bbox': None, 'type': 'Point', 'coordinates': (-112.4943339159, 45.6875333395)}	\N
-150	diedaddress	\N	\N	Newton MA	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	106
-151	organization	\N	\N	Rueil-Malmaison	FR	{'bbox': None, 'type': 'Point', 'coordinates': (-2.7544221495, 42.1820291785)}	\N
-152	bornaddress	\N	\N	Menin	BE	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	107
-153	diedaddress	\N	\N	Tours	FR	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	107
-154	organization	\N	\N	Jerusalem	IL	{'bbox': None, 'type': 'Point', 'coordinates': (34.9964234505, 31.4448606644)}	\N
-155	bornaddress	\N	\N	Frankfurt-on-the-Main	DE	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	108
-156	bornaddress	\N	\N	Stainforth	GB	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	110
-157	diedaddress	\N	\N	Canterbury	GB	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	110
-158	organization	\N	\N	Sheffield	GB	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	\N
-159	bornaddress	\N	\N	Hildesheim	DE	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	111
-160	organization	\N	\N	Cleveland OH	US	{'bbox': None, 'type': 'Point', 'coordinates': (-112.4943339159, 45.6875333395)}	\N
-161	bornaddress	\N	\N	Auburn AL	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	112
-162	bornaddress	\N	\N	Pongaroa	NZ	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	113
-163	bornaddress	\N	\N	Banbury	GB	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	114
-164	organization	\N	\N	Maine ME	US	{'bbox': None, 'type': 'Point', 'coordinates': (-112.4943339159, 45.6875333395)}	\N
-165	bornaddress	\N	\N	Winnipeg	CA	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	116
-166	bornaddress	\N	\N	Newton-le-Willows	GB	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	117
-167	diedaddress	\N	\N	Winchester	GB	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	117
-168	organization	\N	\N	Basel	CH	{'bbox': None, 'type': 'Point', 'coordinates': (8.2159126615, 46.7990859221)}	\N
-169	bornaddress	\N	\N	Gränichen	CH	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	118
-170	organization	\N	\N	Ashburn VA	US	{'bbox': None, 'type': 'Point', 'coordinates': (-112.4943339159, 45.6875333395)}	\N
-171	bornaddress	\N	\N	Ann Arbor MI	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	119
-172	bornaddress	\N	\N	Jönköping	SE	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	120
-173	diedaddress	\N	\N	Ndola	ZM	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	120
-174	bornaddress	\N	\N	Belfast	GB	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	121
-175	bornaddress	\N	\N	Madrid	ES	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	123
-176	bornaddress	\N	\N	Woodstock	GB	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	124
-177	bornaddress	\N	\N	Danzig (now Gdansk)	PL	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	126
-178	diedaddress	\N	\N	Lübeck	DE	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	126
-179	bornaddress	\N	\N	Gary IN	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	127
-180	diedaddress	\N	\N	Belmont MA	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	127
-181	bornaddress	\N	\N	Yakima WA	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	128
-182	bornaddress	\N	\N	Milwaukee WI	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	129
-183	diedaddress	\N	\N	Branford CT	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	129
-184	bornaddress	\N	\N	Haverhill MA	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	130
-185	bornaddress	\N	\N	Gorizia	IT	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	131
-186	organization	\N	\N	Hamilton Ontario	CA	{'bbox': None, 'type': 'Point', 'coordinates': (-98.2945373672, 61.3765600742)}	\N
-187	bornaddress	\N	\N	Lethbridge Alberta	CA	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	132
-188	organization	\N	\N	Zurich	CH	{'bbox': None, 'type': 'Point', 'coordinates': (8.2159126615, 46.7990859221)}	\N
-189	bornaddress	\N	\N	Mulhouse	FR	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	133
-190	organization	\N	\N	Berlin-Dahlem	DE	{'bbox': None, 'type': 'Point', 'coordinates': (10.3817108727, 51.1062734358)}	\N
-191	bornaddress	\N	\N	Karlsruhe	DE	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	134
-192	diedaddress	\N	\N	Locarno	CH	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	134
-193	bornaddress	\N	\N	Vukovar	HR	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	136
-194	bornaddress	\N	\N	Portland OR	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	137
-195	diedaddress	\N	\N	Big Sur CA	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	137
-196	bornaddress	\N	\N	Gravesend	GB	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	138
-197	diedaddress	\N	\N	College Station TX	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	138
-198	organization	\N	\N	Los Angeles CA	US	{'bbox': None, 'type': 'Point', 'coordinates': (-112.4943339159, 45.6875333395)}	\N
-199	bornaddress	\N	\N	Chester VT	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	139
-200	diedaddress	\N	\N	Palm Desert CA	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	139
-201	bornaddress	\N	\N	Methuen MA	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	140
-202	bornaddress	\N	\N	Arnhem	NL	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	141
-203	diedaddress	\N	\N	\N	NL	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	141
-204	bornaddress	\N	\N	Langford Grove Maldon Essex	GB	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	142
-205	bornaddress	\N	\N	Bologna	IT	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	143
-207	organization	\N	\N	Lidingö Stockholm	SE	{'bbox': None, 'type': 'Point', 'coordinates': (16.7542843545, 62.777378402)}	\N
-208	bornaddress	\N	\N	Stenstorp	SE	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	144
-209	organization	\N	\N	Liverpool	GB	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	\N
-210	bornaddress	\N	\N	Taylorville IL	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	147
-211	bornaddress	\N	\N	Greenville SC	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	148
-212	diedaddress	\N	\N	Berkeley CA	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	148
-213	bornaddress	\N	\N	Toyohashi	JP	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	149
-214	bornaddress	\N	\N	Aarberg	CH	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	150
-215	bornaddress	\N	\N	Wichita KS	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	151
-216	organization	\N	\N	Lausanne	CH	{'bbox': None, 'type': 'Point', 'coordinates': (8.2159126615, 46.7990859221)}	\N
-217	bornaddress	\N	\N	Aigle	CH	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	152
-218	bornaddress	\N	\N	Albuquerque NM	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	153
-219	bornaddress	\N	\N	Sulechów	PL	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	154
-220	organization	\N	\N	Dallas TX	US	{'bbox': None, 'type': 'Point', 'coordinates': (-112.4943339159, 45.6875333395)}	\N
-221	bornaddress	\N	\N	St. Paul MN	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	156
-222	bornaddress	\N	\N	Pretoria	ZA	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	157
-223	diedaddress	\N	\N	Heiden	CH	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	158
-224	bornaddress	\N	\N	Bremen	DE	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	161
-225	bornaddress	\N	\N	Val di Castello	IT	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	163
-226	bornaddress	\N	\N	Vicuña	CL	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	164
-227	diedaddress	\N	\N	Hempstead NY	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	164
-228	bornaddress	\N	\N	Buczacz (now Buchach)	UA	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	165
-229	diedaddress	\N	\N	Rehovot	IL	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	165
-230	bornaddress	\N	\N	Śeteniai	LT	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	166
-231	diedaddress	\N	\N	Kraków	PL	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	166
-232	bornaddress	\N	\N	Calais	FR	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	167
-233	bornaddress	\N	\N	Kingston ON	CA	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	168
-234	diedaddress	\N	\N	Siena	IT	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	168
-235	organization	\N	\N	Gothenburg	SE	{'bbox': None, 'type': 'Point', 'coordinates': (16.7542843545, 62.777378402)}	\N
-236	bornaddress	\N	\N	Petilla de Aragón	ES	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	170
-237	organization	\N	\N	Utrecht	NL	{'bbox': None, 'type': 'Point', 'coordinates': (5.2215917713, 52.0724168637)}	\N
-238	bornaddress	\N	\N	Nijkerk	NL	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	171
-239	organization	\N	\N	Szeged	HU	{'bbox': None, 'type': 'Point', 'coordinates': (19.3963546422, 47.1631484858)}	\N
-240	diedaddress	\N	\N	Woods Hole MA	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	172
-241	bornaddress	\N	\N	Northampton	GB	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	173
-242	diedaddress	\N	\N	San Diego CA	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	173
-243	bornaddress	\N	\N	Neisse (now Nysa)	PL	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	174
-244	diedaddress	\N	\N	Burlington MA	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	174
-245	diedaddress	\N	\N	Cannes	FR	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	175
-246	diedaddress	\N	\N	Oyster Bay NY	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	176
-247	bornaddress	\N	\N	Jamaica Plain MA (now Boston MA)	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	178
-248	bornaddress	\N	\N	Dinant	BE	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	180
-249	diedaddress	\N	\N	Leuven	BE	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	180
-250	bornaddress	\N	\N	Putney VT	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	181
-251	bornaddress	\N	\N	Kalundborg	DK	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	182
-252	diedaddress	\N	\N	Lillehammer	NO	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	182
-253	bornaddress	\N	\N	New Albany MS	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	183
-254	diedaddress	\N	\N	Byhalia MS	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	183
-255	bornaddress	\N	\N	Arlington SD	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	184
-256	bornaddress	\N	\N	Glasgow	GB	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	187
-257	organization	\N	\N	West Lafayette IN	US	{'bbox': None, 'type': 'Point', 'coordinates': (-112.4943339159, 45.6875333395)}	\N
-258	diedaddress	\N	\N	Lafayette IN	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	189
-259	bornaddress	\N	\N	Zusamaltheim	DE	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	191
-260	bornaddress	\N	\N	Monrovia	LR	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	192
-261	organization	\N	\N	Strasbourg	FR	{'bbox': None, 'type': 'Point', 'coordinates': (-2.7544221495, 42.1820291785)}	\N
-262	bornaddress	\N	\N	Wels	AT	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	196
-263	organization	\N	\N	Munster	DE	{'bbox': None, 'type': 'Point', 'coordinates': (10.3817108727, 51.1062734358)}	\N
-264	bornaddress	\N	\N	Lagow	PL	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	198
-265	diedaddress	\N	\N	Burgberg	DE	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	198
-266	bornaddress	\N	\N	Ainay-le-Château	FR	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	199
-267	bornaddress	\N	\N	Yonkers NY	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	201
-268	diedaddress	\N	\N	Tromsø	NO	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	201
-269	bornaddress	\N	\N	Ulm	DE	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	202
-270	bornaddress	\N	\N	Dieppe	FR	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	203
-271	diedaddress	\N	\N	San Marino CA	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	204
-272	bornaddress	\N	\N	Blankenburg	DE	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	205
-273	organization	\N	\N	Mountain View CA	US	{'bbox': None, 'type': 'Point', 'coordinates': (-112.4943339159, 45.6875333395)}	\N
-274	diedaddress	\N	\N	Twin Falls ID	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	206
-275	bornaddress	\N	\N	Harborne	GB	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	209
-276	bornaddress	\N	\N	Elizabeth NJ	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	210
-277	diedaddress	\N	\N	Unkel	DE	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	211
-278	bornaddress	\N	\N	Nam Ha province	VN	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	212
-279	diedaddress	\N	\N	Hanoi	VN	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	212
-280	bornaddress	\N	\N	Kobiele Wielkie	PL	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	215
-281	diedaddress	\N	\N	Warsaw	PL	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	215
-282	bornaddress	\N	\N	Jämshög	SE	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	216
-283	organization	\N	\N	Greenwich CT	US	{'bbox': None, 'type': 'Point', 'coordinates': (-112.4943339159, 45.6875333395)}	\N
-284	bornaddress	\N	\N	Timmins ON	CA	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	219
-285	organization	\N	\N	Research Triangle Park NC	US	{'bbox': None, 'type': 'Point', 'coordinates': (-112.4943339159, 45.6875333395)}	\N
-286	bornaddress	\N	\N	Milford MA	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	221
-287	organization	\N	\N	Memphis TN	US	{'bbox': None, 'type': 'Point', 'coordinates': (-112.4943339159, 45.6875333395)}	\N
-288	bornaddress	\N	\N	Brisbane	AU	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	222
-289	organization	\N	\N	Long Island New York NY	US	{'bbox': None, 'type': 'Point', 'coordinates': (-112.4943339159, 45.6875333395)}	\N
-290	bornaddress	\N	\N	Owosso MI	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	224
-291	diedaddress	\N	\N	Syosset NY	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	224
-292	bornaddress	\N	\N	Logan UT	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	225
-293	bornaddress	\N	\N	Amherst NS	CA	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	227
-294	diedaddress	\N	\N	Truro NS	CA	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	227
-621	organization	\N	\N	Sapporo	JP	{'bbox': None, 'type': 'Point', 'coordinates': (137.9799595076, 37.5526225906)}	\N
-295	organization	\N	\N	Brussels	BE	{'bbox': None, 'type': 'Point', 'coordinates': (4.6396699631, 50.6375465936)}	\N
-296	bornaddress	\N	\N	Etterbeek	BE	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	229
-297	bornaddress	\N	\N	Detroit MI	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	230
-298	organization	\N	\N	Haifa	IL	{'bbox': None, 'type': 'Point', 'coordinates': (34.9964234505, 31.4448606644)}	\N
-299	bornaddress	\N	\N	Baltimore MD	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	234
-300	diedaddress	\N	\N	Los Gatos CA	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	235
-301	diedaddress	\N	\N	White Plains NY	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	236
-302	organization	\N	\N	Wilmington DE	US	{'bbox': None, 'type': 'Point', 'coordinates': (-112.4943339159, 45.6875333395)}	\N
-303	bornaddress	\N	\N	Pusan	KR	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	237
-304	diedaddress	\N	\N	Salem NJ	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	237
-305	bornaddress	\N	\N	Winterthur	CH	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	238
-306	organization	\N	\N	Aarhus	DK	{'bbox': None, 'type': 'Point', 'coordinates': (10.0502290036, 55.9659213307)}	\N
-307	bornaddress	\N	\N	Lemvig	DK	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	239
-308	bornaddress	\N	\N	Vladivostok	RU	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	240
-309	bornaddress	\N	\N	Görlitz	DE	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	241
-310	bornaddress	\N	\N	Gaffken (now Parusnoye)	RU	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	243
-311	organization	\N	\N	Edinburgh	GB	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	\N
-312	bornaddress	\N	\N	Breslau (now Wroclaw)	PL	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	244
-313	bornaddress	\N	\N	Bahia Blanca	AR	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	246
-314	bornaddress	\N	\N	Nice	FR	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	248
-315	bornaddress	\N	\N	Arequipa	PE	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	250
-316	bornaddress	\N	\N	Hamamatsu	JP	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	251
-317	organization	\N	\N	Beijing	CN	{'bbox': None, 'type': 'Point', 'coordinates': (103.8317512505, 36.5602062669)}	\N
-318	bornaddress	\N	\N	Zhejiang Ningbo	CN	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	253
-319	bornaddress	\N	\N	Leeds	GB	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	257
-320	diedaddress	\N	\N	Milton Keynes	GB	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	257
-321	diedaddress	\N	\N	Orsay	FR	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	258
-322	bornaddress	\N	\N	Ridgeville IN	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	259
-323	diedaddress	\N	\N	Salamanca	ES	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	259
-353	bornaddress	\N	\N	Imperia	IT	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	290
-324	diedaddress	\N	\N	Llangarron	GB	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	260
-325	bornaddress	\N	\N	Wisbech Cambridgeshire	GB	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	262
-326	diedaddress	\N	\N	Lewes East Sussex	GB	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	262
-327	organization	\N	\N	San Francisco CA	US	{'bbox': None, 'type': 'Point', 'coordinates': (-112.4943339159, 45.6875333395)}	\N
-328	bornaddress	\N	\N	Alice TX	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	263
-329	bornaddress	\N	\N	Leicester	GB	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	265
-330	bornaddress	\N	\N	Kristiania (now Oslo)	NO	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	267
-331	bornaddress	\N	\N	Bulawayo	ZW	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	268
-332	diedaddress	\N	\N	Stanger	ZA	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	268
-333	bornaddress	\N	\N	Heredia	CR	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	269
-334	bornaddress	\N	\N	Calcutta	IN	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	271
-335	bornaddress	\N	\N	Fredericia	DK	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	272
-336	diedaddress	\N	\N	Ordrup	DK	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	272
-337	bornaddress	\N	\N	Lom	NO	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	273
-338	diedaddress	\N	\N	Grimstad	NO	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	273
-339	bornaddress	\N	\N	Ruse	BG	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	274
-340	bornaddress	\N	\N	Cairo	EG	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	275
-341	bornaddress	\N	\N	Nyeri	KE	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	280
-342	diedaddress	\N	\N	Nairobi	KE	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	280
-343	bornaddress	\N	\N	Pressburg (now Bratislava)	SK	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	281
-344	diedaddress	\N	\N	Messelhausen	DE	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	281
-345	organization	\N	\N	Groningen	NL	{'bbox': None, 'type': 'Point', 'coordinates': (5.2215917713, 52.0724168637)}	\N
-346	bornaddress	\N	\N	Amsterdam	NL	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	283
-347	bornaddress	\N	\N	Mount Vernon NY	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	285
-348	diedaddress	\N	\N	Palo Alto CA	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	285
-349	bornaddress	\N	\N	Rotterdam	NL	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	286
-350	bornaddress	\N	\N	Rufford near Chesterfield	GB	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	288
-351	diedaddress	\N	\N	Great Missenden	GB	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	288
-352	organization	\N	\N	Milan	IT	{'bbox': None, 'type': 'Point', 'coordinates': (12.0723891753, 42.7864450125)}	\N
-354	diedaddress	\N	\N	Bergamo	IT	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	290
-355	diedaddress	\N	\N	Castillon-du-Gard	FR	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	292
-356	bornaddress	\N	\N	Chidambaram Tamil Nadu	IN	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	296
-357	bornaddress	\N	\N	Echternach	LU	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	297
-358	bornaddress	\N	\N	Newcastle upon Tyne	GB	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	298
-359	bornaddress	\N	\N	Yamanashi Prefecture	JP	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	299
-360	bornaddress	\N	\N	Tramelan	CH	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	301
-361	bornaddress	\N	\N	Autun	FR	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	302
-362	diedaddress	\N	\N	Barbizon	FR	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	302
-363	bornaddress	\N	\N	Ostend	BE	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	303
-364	diedaddress	\N	\N	Lucerne	CH	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	303
-365	diedaddress	\N	\N	Épernay	FR	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	304
-366	bornaddress	\N	\N	Livingston Manor NY	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	306
-367	bornaddress	\N	\N	Toronto	CA	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	307
-368	bornaddress	\N	\N	Abeokuta	NG	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	308
-369	bornaddress	\N	\N	Castries	LC	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	309
-370	diedaddress	\N	\N	Bridgetown	BB	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	309
-371	bornaddress	\N	\N	Pottsville PA	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	310
-372	organization	\N	\N	Columbia	US	{'bbox': None, 'type': 'Point', 'coordinates': (-112.4943339159, 45.6875333395)}	\N
-373	bornaddress	\N	\N	Norwalk CT	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	311
-374	bornaddress	\N	\N	Geneva NE	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	313
-375	organization	\N	\N	Mülheim an der Ruhr	DE	{'bbox': None, 'type': 'Point', 'coordinates': (10.3817108727, 51.1062734358)}	\N
-376	bornaddress	\N	\N	Bellshill	GB	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	316
-377	bornaddress	\N	\N	Vik	SE	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	317
-378	bornaddress	\N	\N	Germantown PA	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	318
-379	bornaddress	\N	\N	Hoechst	DE	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	319
-380	bornaddress	\N	\N	Cologne	DE	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	320
-381	bornaddress	\N	\N	Walkerton IN	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	321
-382	bornaddress	\N	\N	Lenoir NC	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	323
-383	diedaddress	\N	\N	Newport Beach CA	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	323
-384	bornaddress	\N	\N	Newark	GB	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	324
-385	diedaddress	\N	\N	Kingston upon Thames	GB	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	324
-386	organization	\N	\N	Beverly MA	US	{'bbox': None, 'type': 'Point', 'coordinates': (-112.4943339159, 45.6875333395)}	\N
-387	bornaddress	\N	\N	Derby	GB	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	325
-388	bornaddress	\N	\N	Viipuri (now Vyborg)	FI	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	327
-389	bornaddress	\N	\N	Sochi	RU	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	328
-390	bornaddress	\N	\N	Tel Aviv	IL	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	329
-391	bornaddress	\N	\N	Geldrop	NL	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	331
-392	bornaddress	\N	\N	Holbeach	GB	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	332
-393	diedaddress	\N	\N	Croydon	GB	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	332
-394	bornaddress	\N	\N	Lorain OH	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	336
-395	diedaddress	\N	\N	Oak Lawn IL	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	337
-396	organization	\N	\N	Tunis	TN	{'bbox': None, 'type': 'Point', 'coordinates': (9.5548851058, 34.1194945806)}	\N
-397	bornaddress	\N	\N	Rouen	FR	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	338
-398	organization	\N	\N	St. Louis MO	US	{'bbox': None, 'type': 'Point', 'coordinates': (-112.4943339159, 45.6875333395)}	\N
-399	bornaddress	\N	\N	Hume IL	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	339
-400	bornaddress	\N	\N	Platteville WI	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	340
-401	bornaddress	\N	\N	Hamadan	IR	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	342
-402	bornaddress	\N	\N	Possum Trot KY	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	343
-403	diedaddress	\N	\N	Duarte CA	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	343
-404	organization	\N	\N	College Park MD	US	{'bbox': None, 'type': 'Point', 'coordinates': (-112.4943339159, 45.6875333395)}	\N
-405	bornaddress	\N	\N	Oakland CA	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	345
-406	bornaddress	\N	\N	Chittagong	BD	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	346
-407	bornaddress	\N	\N	Turin	IT	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	347
-408	bornaddress	\N	\N	Wilkes-Barre PA	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	348
-409	organization	\N	\N	Kashiwa	JP	{'bbox': None, 'type': 'Point', 'coordinates': (137.9799595076, 37.5526225906)}	\N
-410	bornaddress	\N	\N	Higashimatsuyama	JP	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	350
-411	organization	\N	\N	Greifswald	DE	{'bbox': None, 'type': 'Point', 'coordinates': (10.3817108727, 51.1062734358)}	\N
-412	bornaddress	\N	\N	Schickenhof	DE	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	352
-413	diedaddress	\N	\N	Traunstein	DE	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	352
-414	bornaddress	\N	\N	Baku	AZ	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	353
-415	organization	\N	\N	Holmdel NJ	US	{'bbox': None, 'type': 'Point', 'coordinates': (-112.4943339159, 45.6875333395)}	\N
-416	bornaddress	\N	\N	Houston TX	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	354
-417	bornaddress	\N	\N	Nelson	NZ	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	355
-418	bornaddress	\N	\N	Cluny	GB	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	358
-419	diedaddress	\N	\N	Aberdeen	GB	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	358
-420	bornaddress	\N	\N	Raipur	IN	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	359
-421	diedaddress	\N	\N	Concord MA	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	359
-422	bornaddress	\N	\N	Todmorden	GB	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	361
-423	bornaddress	\N	\N	San José CA	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	362
-424	organization	\N	\N	Irvine CA	US	{'bbox': None, 'type': 'Point', 'coordinates': (-112.4943339159, 45.6875333395)}	\N
-425	bornaddress	\N	\N	Delaware OH	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	363
-426	diedaddress	\N	\N	Corona del Mar CA	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	363
-427	bornaddress	\N	\N	Akron OH	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	364
-428	organization	\N	\N	Boulder CO	US	{'bbox': None, 'type': 'Point', 'coordinates': (-112.4943339159, 45.6875333395)}	\N
-429	bornaddress	\N	\N	Corvallis OR	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	366
-430	bornaddress	\N	\N	Ivano-Frankivsk	UA	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	367
-431	bornaddress	\N	\N	Londonderry	GB	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	372
-432	bornaddress	\N	\N	Wola Okrzejska	PL	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	373
-433	diedaddress	\N	\N	Vevey	CH	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	373
-434	bornaddress	\N	\N	Sauk Centre MN	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	374
-435	bornaddress	\N	\N	Bordeaux	FR	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	375
-436	bornaddress	\N	\N	Dublin	IE	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	376
-437	bornaddress	\N	\N	Montreal	CA	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	378
-438	diedaddress	\N	\N	Brookline MA	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	378
-439	bornaddress	\N	\N	St. Columb Minor	GB	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	379
-440	diedaddress	\N	\N	Perranarworthal	GB	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	379
-441	bornaddress	\N	\N	Azinhaga	PT	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	380
-443	bornaddress	\N	\N	Gelsenkirchen	DE	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	385
-444	diedaddress	\N	\N	Eugene OR	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	386
-445	bornaddress	\N	\N	Nitzkydorf Banat	RO	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	387
-446	bornaddress	\N	\N	Fulda	DE	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	389
-447	bornaddress	\N	\N	Wigton	GB	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	390
-448	bornaddress	\N	\N	Shanghai	CN	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	391
-449	organization	\N	\N	Grenoble	FR	{'bbox': None, 'type': 'Point', 'coordinates': (-2.7544221495, 42.1820291785)}	\N
-450	diedaddress	\N	\N	Brive-Corrèze	FR	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	392
-451	organization	\N	\N	Schenectady NY	US	{'bbox': None, 'type': 'Point', 'coordinates': (-112.4943339159, 45.6875333395)}	\N
-452	bornaddress	\N	\N	Bergen	NO	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	393
-453	diedaddress	\N	\N	Palma Majorca	ES	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	395
-454	organization	\N	\N	Nottingham	GB	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	\N
-455	bornaddress	\N	\N	Karcag	HU	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	397
-456	bornaddress	\N	\N	Euskirchen	DE	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	400
-457	organization	\N	\N	Graz	AT	{'bbox': None, 'type': 'Point', 'coordinates': (14.1305444711, 47.5857571625)}	\N
-458	bornaddress	\N	\N	Laibach (now Ljubljana)	SI	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	401
-459	bornaddress	\N	\N	Cedarville IL	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	402
-460	bornaddress	\N	\N	Cresco IA	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	404
-461	bornaddress	\N	\N	Modica	IT	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	407
-462	diedaddress	\N	\N	Naples	IT	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	407
-463	bornaddress	\N	\N	Sevilla	ES	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	408
-464	diedaddress	\N	\N	Gros-Islet	LC	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	409
-465	diedaddress	\N	\N	Freiburg	DE	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	410
-466	bornaddress	\N	\N	Victoria BC	CA	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	411
-467	diedaddress	\N	\N	Harrison NY	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	411
-468	bornaddress	\N	\N	Santiniketan	IN	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	412
-469	bornaddress	\N	\N	Rio de Janeiro	BR	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	416
-470	bornaddress	\N	\N	Halifax Nova Scotia	CA	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	417
-471	bornaddress	\N	\N	Hoquiam WA	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	418
-472	bornaddress	\N	\N	York PA	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	419
-473	bornaddress	\N	\N	Stuttgart	DE	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	420
-474	organization	\N	\N	Garching	DE	{'bbox': None, 'type': 'Point', 'coordinates': (10.3817108727, 51.1062734358)}	\N
-475	bornaddress	\N	\N	Strelno (now Strzelno)	PL	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	423
-476	diedaddress	\N	\N	Kyoto	JP	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	424
-477	bornaddress	\N	\N	Novaya Chigla	RU	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	425
-478	bornaddress	\N	\N	Guebwiller	FR	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	427
-479	diedaddress	\N	\N	Bandol	FR	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	427
-480	bornaddress	\N	\N	Landsberg	DE	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	430
-481	bornaddress	\N	\N	Waltersdorf (now Niegoslawice)	PL	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	431
-482	bornaddress	\N	\N	Fareham	GB	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	432
-483	bornaddress	\N	\N	Kaysersberg	FR	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	433
-484	diedaddress	\N	\N	Lambaréné	GA	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	433
-485	bornaddress	\N	\N	Popowo	PL	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	434
-486	bornaddress	\N	\N	Roholte	DK	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	435
-487	diedaddress	\N	\N	Klotzsche	DE	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	435
-488	bornaddress	\N	\N	Kingston Hill	GB	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	436
-489	diedaddress	\N	\N	Bornheim-Merten	DE	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	437
-490	bornaddress	\N	\N	Klippan	SE	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	438
-491	diedaddress	\N	\N	Vålådalen	SE	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	438
-492	diedaddress	\N	\N	West Berlin	DE	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	439
-493	diedaddress	\N	\N	Tucson AZ	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	442
-494	bornaddress	\N	\N	Syracuse NY	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	443
-495	bornaddress	\N	\N	Halifax	GB	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	444
-496	bornaddress	\N	\N	Middletown CT	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	445
-497	organization	\N	\N	Gaithersburg MD	US	{'bbox': None, 'type': 'Point', 'coordinates': (-112.4943339159, 45.6875333395)}	\N
-498	diedaddress	\N	\N	Starnberg	DE	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	447
-499	bornaddress	\N	\N	Newburyport MA	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	448
-500	diedaddress	\N	\N	Arlington VA	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	448
-560	bornaddress	\N	\N	Uchiko	JP	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	517
-501	bornaddress	\N	\N	Ishpeming MI	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	450
-502	diedaddress	\N	\N	Lafayette CA	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	450
-503	bornaddress	\N	\N	Redondo Beach CA	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	451
-504	diedaddress	\N	\N	El Cerrito CA	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	451
-505	bornaddress	\N	\N	Rendcombe	GB	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	452
-506	bornaddress	\N	\N	Nara	JP	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	455
-507	bornaddress	\N	\N	Canton MA	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	457
-508	diedaddress	\N	\N	Buffalo NY	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	457
-509	organization	\N	\N	Sèvres	FR	{'bbox': None, 'type': 'Point', 'coordinates': (-2.7544221495, 42.1820291785)}	\N
-510	bornaddress	\N	\N	Fleurier	CH	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	459
-511	bornaddress	\N	\N	Glencorse	GB	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	460
-512	diedaddress	\N	\N	Carlops	GB	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	460
-513	bornaddress	\N	\N	Dungarvan	IE	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	461
-514	bornaddress	\N	\N	Landskrona	SE	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	462
-515	bornaddress	\N	\N	Sainte-Foy-lès-Lyon	FR	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	463
-516	bornaddress	\N	\N	Orange NJ	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	464
-517	diedaddress	\N	\N	Lakeville CT	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	464
-518	diedaddress	\N	\N	Thieuloy-Saint-Antoine	FR	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	466
-519	diedaddress	\N	\N	Tunbridge Wells	GB	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	467
-520	bornaddress	\N	\N	Sighet	RO	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	469
-521	bornaddress	\N	\N	Moguer	ES	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	471
-522	diedaddress	\N	\N	San Juan	PR	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	471
-524	diedaddress	\N	\N	Santiago	CL	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	473
-525	bornaddress	\N	\N	Leoncin	PL	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	474
-526	diedaddress	\N	\N	Surfside FL	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	474
-527	bornaddress	\N	\N	Minnigaff	GB	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	476
-528	bornaddress	\N	\N	Toyama City	JP	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	477
-529	bornaddress	\N	\N	Plains GA	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	478
-530	bornaddress	\N	\N	Bukavu	CD	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	480
-531	bornaddress	\N	\N	Kojo	IQ	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	481
-532	bornaddress	\N	\N	Guelph	CA	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	483
-533	bornaddress	\N	\N	Barger-Compascuum	NL	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	484
-534	organization	\N	\N	Waterloo	CA	{'bbox': None, 'type': 'Point', 'coordinates': (-98.2945373672, 61.3765600742)}	\N
-535	bornaddress	\N	\N	Mumbai	IN	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	486
-536	organization	\N	\N	Breisgau	DE	{'bbox': None, 'type': 'Point', 'coordinates': (10.3817108727, 51.1062734358)}	\N
-537	bornaddress	\N	\N	Worms	DE	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	489
-538	bornaddress	\N	\N	Rosheim	FR	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	491
-539	organization	\N	\N	Vancouver	CA	{'bbox': None, 'type': 'Point', 'coordinates': (-98.2945373672, 61.3765600742)}	\N
-540	bornaddress	\N	\N	Blackpool	GB	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	492
-541	bornaddress	\N	\N	Pfaffendorf	DE	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	494
-542	bornaddress	\N	\N	Wooster OH	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	495
-543	organization	\N	\N	Harwell Berkshire	GB	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	\N
-544	bornaddress	\N	\N	Oak Park IL	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	499
-545	diedaddress	\N	\N	Tallahassee FL	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	499
-546	organization	\N	\N	New Orleans LA	US	{'bbox': None, 'type': 'Point', 'coordinates': (-112.4943339159, 45.6875333395)}	\N
-547	bornaddress	\N	\N	Wilno (now Vilnius)	LT	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	500
-548	bornaddress	\N	\N	Clausthal (now Clausthal-Zellerfeld)	DE	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	503
-549	diedaddress	\N	\N	Baden-Baden	DE	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	503
-550	organization	\N	\N	Mainz	DE	{'bbox': None, 'type': 'Point', 'coordinates': (10.3817108727, 51.1062734358)}	\N
-551	diedaddress	\N	\N	Schopfheim	DE	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	506
-552	bornaddress	\N	\N	Schroda	PL	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	507
-553	bornaddress	\N	\N	Visalia CA	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	508
-554	diedaddress	\N	\N	Bourne	GB	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	509
-555	bornaddress	\N	\N	Bremerhaven-Lehe	DE	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	510
-556	bornaddress	\N	\N	Staunton VA	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	513
-557	bornaddress	\N	\N	Bombay (now Mumbai)	IN	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	514
-558	bornaddress	\N	\N	Trelleck	GB	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	516
-559	diedaddress	\N	\N	Penrhyndeudraeth	GB	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	516
-561	bornaddress	\N	\N	Swanage	GB	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	518
-562	bornaddress	\N	\N	Leningrad (now St. Petersburg)	RU	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	519
-564	bornaddress	\N	\N	Honolulu HI	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	522
-565	organization	\N	\N	Trondheim	NO	{'bbox': None, 'type': 'Point', 'coordinates': (15.4107026868, 68.7958281693)}	\N
-566	bornaddress	\N	\N	Fosnavåg	NO	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	524
-567	bornaddress	\N	\N	Ålesund	NO	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	525
-568	bornaddress	\N	\N	Kobe	JP	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	526
-569	diedaddress	\N	\N	Blue Point NY	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	527
-570	bornaddress	\N	\N	Denver CO	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	528
-571	bornaddress	\N	\N	Lahore	PK	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	530
-572	organization	\N	\N	Bonn	DE	{'bbox': None, 'type': 'Point', 'coordinates': (10.3817108727, 51.1062734358)}	\N
-573	bornaddress	\N	\N	Lorenzkirch	DE	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	531
-574	bornaddress	\N	\N	Niagara Falls	CA	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	533
-575	diedaddress	\N	\N	Rockville MD	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	535
-576	bornaddress	\N	\N	Thorshavn	DK	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	536
-577	bornaddress	\N	\N	West Hartford CT	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	538
-578	diedaddress	\N	\N	Waterford CT	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	538
-579	bornaddress	\N	\N	Norrköping	SE	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	541
-580	diedaddress	\N	\N	Djursholm	SE	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	541
-581	bornaddress	\N	\N	Nizhny Tagil	RU	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	542
-582	bornaddress	\N	\N	Gaomi	CN	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	545
-583	bornaddress	\N	\N	Berne IN	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	547
-584	bornaddress	\N	\N	Siegen	DE	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	548
-585	bornaddress	\N	\N	Privolnoye	RU	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	552
-586	bornaddress	\N	\N	Skedsmo	NO	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	553
-587	bornaddress	\N	\N	Vitebsk Belorussia	BY	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	554
-588	bornaddress	\N	\N	Sioux City IA	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	555
-589	organization	\N	\N	Nashville TN	US	{'bbox': None, 'type': 'Point', 'coordinates': (-112.4943339159, 45.6875333395)}	\N
-590	bornaddress	\N	\N	Burlingame KS	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	556
-591	diedaddress	\N	\N	Miami FL	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	556
-592	organization	\N	\N	Altenberg; Grünau im Almtal	AT	{'bbox': None, 'type': 'Point', 'coordinates': (14.1305444711, 47.5857571625)}	\N
-593	bornaddress	\N	\N	Iasi	RO	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	558
-594	diedaddress	\N	\N	Del Mar CA	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	558
-595	organization	\N	\N	Nedlands	AU	{'bbox': None, 'type': 'Point', 'coordinates': (134.491117773, -25.7323831126)}	\N
-596	bornaddress	\N	\N	Kalgoorlie	AU	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	559
-597	bornaddress	\N	\N	Yukon FL	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	560
-598	bornaddress	\N	\N	Grand Valley CO	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	561
-599	bornaddress	\N	\N	Helsa	DE	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	562
-600	diedaddress	\N	\N	Mülheim	DE	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	562
-601	bornaddress	\N	\N	Buchs	CH	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	564
-602	diedaddress	\N	\N	Wollerau	CH	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	564
-603	diedaddress	\N	\N	Wickenberg AZ	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	565
-604	bornaddress	\N	\N	Kattowitz (now Katowice)	PL	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	569
-605	bornaddress	\N	\N	Usman	RU	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	570
-606	bornaddress	\N	\N	Council ID	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	571
-607	bornaddress	\N	\N	Wingham	CA	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	573
-608	bornaddress	\N	\N	Chiran	JP	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	574
-609	bornaddress	\N	\N	Burnham-on-Sea	GB	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	575
-610	organization	\N	\N	Waltham MA	US	{'bbox': None, 'type': 'Point', 'coordinates': (-112.4943339159, 45.6875333395)}	\N
-611	bornaddress	\N	\N	Kansas City MO	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	576
-612	bornaddress	\N	\N	Lancashire	GB	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	577
-613	bornaddress	\N	\N	Colchester	GB	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	578
-614	bornaddress	\N	\N	Agen	FR	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	579
-615	bornaddress	\N	\N	Birmingham	GB	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	582
-616	bornaddress	\N	\N	Guatemala City	GT	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	588
-617	bornaddress	\N	\N	Warwick	GB	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	589
-618	diedaddress	\N	\N	Blockley	GB	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	589
-619	diedaddress	\N	\N	Focsani	RO	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	591
-620	organization	\N	\N	Bloomington IN	US	{'bbox': None, 'type': 'Point', 'coordinates': (-112.4943339159, 45.6875333395)}	\N
-622	bornaddress	\N	\N	Mukawa	JP	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	594
-623	organization	\N	\N	Durham NC	US	{'bbox': None, 'type': 'Point', 'coordinates': (-112.4943339159, 45.6875333395)}	\N
-624	bornaddress	\N	\N	Raton NM	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	596
-625	bornaddress	\N	\N	Jena	DE	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	598
-626	bornaddress	\N	\N	Ried im Innkreis	AT	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	600
-627	bornaddress	\N	\N	Chaguanas	TT	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	601
-628	bornaddress	\N	\N	Linköping	SE	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	604
-629	bornaddress	\N	\N	Traralgon	AU	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	605
-630	diedaddress	\N	\N	Sallanches	FR	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	606
-631	bornaddress	\N	\N	Lille	FR	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	607
-632	diedaddress	\N	\N	Shipston-on-Stour	GB	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	610
-633	bornaddress	\N	\N	Zloczov	UA	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	611
-634	bornaddress	\N	\N	Calw	DE	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	613
-635	diedaddress	\N	\N	Montagnola	CH	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	613
-636	bornaddress	\N	\N	Renton WA	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	617
-637	bornaddress	\N	\N	Willesden	GB	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	618
-638	bornaddress	\N	\N	Bad Cannstatt	DE	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	622
-639	bornaddress	\N	\N	Kermanshah	IR	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	623
-640	diedaddress	\N	\N	Lexington MA	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	624
-641	bornaddress	\N	\N	Dijon	FR	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	625
-642	bornaddress	\N	\N	Augsburg	DE	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	626
-643	diedaddress	\N	\N	Falmouth MA	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	627
-644	bornaddress	\N	\N	Chorley	GB	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	628
-645	bornaddress	\N	\N	Næstved	DK	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	629
-646	bornaddress	\N	\N	Potsdam NY	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	631
-647	bornaddress	\N	\N	Atlanta GA	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	632
-648	diedaddress	\N	\N	Zushi	JP	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	634
-649	bornaddress	\N	\N	Fleräng	SE	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	639
-650	bornaddress	\N	\N	South Norwalk CT	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	643
-651	bornaddress	\N	\N	Hampstead	GB	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	645
-652	diedaddress	\N	\N	Grantchester	GB	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	645
-653	bornaddress	\N	\N	Sterling IL	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	646
-654	bornaddress	\N	\N	Fort Worth TX	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	647
-655	diedaddress	\N	\N	Cresskill NJ	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	647
-656	diedaddress	\N	\N	Indianapolis IN	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	648
-657	bornaddress	\N	\N	Nicosia	CY	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	649
-658	bornaddress	\N	\N	Troyes	FR	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	650
-659	organization	\N	\N	Palaiseau	FR	{'bbox': None, 'type': 'Point', 'coordinates': (-2.7544221495, 42.1820291785)}	\N
-660	bornaddress	\N	\N	Albertville	FR	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	651
-661	bornaddress	\N	\N	Hartford CT	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	653
-662	organization	\N	\N	Cold Spring Harbor NY	US	{'bbox': None, 'type': 'Point', 'coordinates': (-112.4943339159, 45.6875333395)}	\N
-663	diedaddress	\N	\N	Huntington NY	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	654
-664	bornaddress	\N	\N	Mart TX	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	656
-665	bornaddress	\N	\N	Hollerich	LU	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	658
-666	organization	\N	\N	Innsbruck	AT	{'bbox': None, 'type': 'Point', 'coordinates': (14.1305444711, 47.5857571625)}	\N
-667	bornaddress	\N	\N	Peggau	AT	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	659
-668	bornaddress	\N	\N	Bloomington IL	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	660
-669	diedaddress	\N	\N	Charlottesville VA	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	660
-670	bornaddress	\N	\N	Sorau (now Zory)	PL	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	661
-671	organization	\N	\N	Trieste	IT	{'bbox': None, 'type': 'Point', 'coordinates': (12.0723891753, 42.7864450125)}	\N
-672	bornaddress	\N	\N	Jhang Maghiāna	PK	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	664
-673	bornaddress	\N	\N	Dordrecht	NL	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	665
-674	bornaddress	\N	\N	Saratov	RU	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	666
-675	bornaddress	\N	\N	Ludwigsburg	DE	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	667
-676	bornaddress	\N	\N	Olympus TN	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	668
-677	diedaddress	\N	\N	Saint-Cyr-sur-Loire	FR	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	671
-678	diedaddress	\N	\N	Roquebrune-Cap-Martin	FR	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	672
-679	bornaddress	\N	\N	Farsø	DK	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	673
-680	bornaddress	\N	\N	Leggiuno-Sangiano	IT	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	674
-681	bornaddress	\N	\N	Norwich	GB	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	676
-682	diedaddress	\N	\N	Rumson NJ	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	677
-683	bornaddress	\N	\N	Sacramento CA	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	678
-684	bornaddress	\N	\N	Lillebonne	FR	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	679
-685	bornaddress	\N	\N	Gainesville FL	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	680
-686	bornaddress	\N	\N	Damanhur	EG	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	681
-687	bornaddress	\N	\N	Wloclawek	PL	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	683
-688	bornaddress	\N	\N	Wahoo NE	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	684
-689	diedaddress	\N	\N	Pomona CA	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	684
-690	bornaddress	\N	\N	Medicine Hat Alberta	CA	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	685
-691	bornaddress	\N	\N	Caracas	VE	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	686
-692	bornaddress	\N	\N	Windsor ON	CA	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	687
-693	diedaddress	\N	\N	Lincoln MA	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	687
-694	bornaddress	\N	\N	Cheetham Hill	GB	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	689
-695	bornaddress	\N	\N	Dewsbury	GB	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	690
-696	diedaddress	\N	\N	Alton	GB	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	690
-697	bornaddress	\N	\N	Northfield MN	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	693
-698	bornaddress	\N	\N	Swansea	GB	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	695
-699	bornaddress	\N	\N	Istanbul	TR	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	696
-700	diedaddress	\N	\N	Saco ME	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	698
-701	diedaddress	\N	\N	Wayland MA	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	699
-702	bornaddress	\N	\N	Aberdeen WA	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	700
-703	bornaddress	\N	\N	Pforzheim	DE	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	701
-704	bornaddress	\N	\N	Tonbridge	GB	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	704
-705	bornaddress	\N	\N	Oranienburg	DE	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	705
-706	bornaddress	\N	\N	Merriman NE	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	707
-707	bornaddress	\N	\N	Provo UT	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	708
-708	organization	\N	\N	Marburg	DE	{'bbox': None, 'type': 'Point', 'coordinates': (10.3817108727, 51.1062734358)}	\N
-709	bornaddress	\N	\N	Hansdorf (now Lawice)	PL	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	709
-710	bornaddress	\N	\N	Frauenfeld	CH	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	712
-711	diedaddress	\N	\N	Ascona	CH	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	712
-712	bornaddress	\N	\N	Luarca	ES	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	713
-713	bornaddress	\N	\N	Tabuse	JP	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	715
-714	bornaddress	\N	\N	Brest Litovsk	BY	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	716
-715	bornaddress	\N	\N	Dolac	BA	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	717
-716	diedaddress	\N	\N	Belgrade	RS	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	717
-717	bornaddress	\N	\N	's Graveland	NL	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	720
-718	diedaddress	\N	\N	Poznan	PL	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	721
-719	bornaddress	\N	\N	Ganzhou	CN	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	722
-720	bornaddress	\N	\N	Fukuoka	JP	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	724
-721	bornaddress	\N	\N	Juvisy-sur-Orge	FR	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	725
-722	bornaddress	\N	\N	Gjesdal	NO	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	727
-723	organization	\N	\N	Weston Creek	AU	{'bbox': None, 'type': 'Point', 'coordinates': (134.491117773, -25.7323831126)}	\N
-724	bornaddress	\N	\N	Missoula MT	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	730
-725	bornaddress	\N	\N	Casablanca	MA	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	732
-726	bornaddress	\N	\N	Pleasanton CA	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	733
-727	bornaddress	\N	\N	Kharkov (now Kharkiv)	UA	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	734
-728	bornaddress	\N	\N	Olten	CH	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	736
-729	organization	\N	\N	New Brunswick NJ	US	{'bbox': None, 'type': 'Point', 'coordinates': (-112.4943339159, 45.6875333395)}	\N
-730	bornaddress	\N	\N	Priluka (now Nova Pryluka)	UA	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	737
-731	diedaddress	\N	\N	Hyannis MA	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	737
-732	bornaddress	\N	\N	Tivoli	IT	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	739
-733	bornaddress	\N	\N	Dabrovica	PL	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	744
-734	bornaddress	\N	\N	Goldschmieden near Breslau	PL	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	746
-735	bornaddress	\N	\N	Omaha NE	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	748
-736	bornaddress	\N	\N	Nagasaki	JP	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	750
-737	bornaddress	\N	\N	Columbus OH	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	752
-738	organization	\N	\N	Bronx NY	US	{'bbox': None, 'type': 'Point', 'coordinates': (-112.4943339159, 45.6875333395)}	\N
-739	bornaddress	\N	\N	Dili	TL	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	756
-740	diedaddress	\N	\N	Ayot St. Lawrence	GB	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	758
-741	bornaddress	\N	\N	Karlbo	SE	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	759
-742	bornaddress	\N	\N	Mondovi	DZ	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	760
-744	bornaddress	\N	\N	Smyrna (now Izmir)	TR	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	761
-745	diedaddress	\N	\N	Athens	GR	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	761
-746	bornaddress	\N	\N	Springs	ZA	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	762
-747	bornaddress	\N	\N	Zelvas	LT	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	764
-748	bornaddress	\N	\N	Riga	LV	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	770
-749	bornaddress	\N	\N	Silkeborg	DK	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	771
-750	bornaddress	\N	\N	Rangoon (now Yangon)	MM	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	774
-751	bornaddress	\N	\N	Maillane	FR	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	775
-752	bornaddress	\N	\N	Ghent	BE	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	776
-753	bornaddress	\N	\N	Clamecy	FR	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	777
-754	diedaddress	\N	\N	Vézelay	FR	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	777
-755	bornaddress	\N	\N	Hillsboro WV	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	778
-756	diedaddress	\N	\N	Danby VT	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	778
-757	bornaddress	\N	\N	Skattungbyn	SE	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	781
-758	bornaddress	\N	\N	Jefferson City MO	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	782
-759	bornaddress	\N	\N	Augusta GA	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	785
-760	organization	\N	\N	Harlow	GB	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	\N
-761	bornaddress	\N	\N	Mingora	PK	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	789
-762	bornaddress	\N	\N	Mürzzuschlag	AT	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	792
-763	bornaddress	\N	\N	Paterson NJ	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	793
-764	diedaddress	\N	\N	Orange CA	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	793
-765	bornaddress	\N	\N	Zonnemaire	NL	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	794
-766	bornaddress	\N	\N	Widnes	GB	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	795
-767	bornaddress	\N	\N	Tiruchirappalli	IN	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	796
-768	diedaddress	\N	\N	Bangalore	IN	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	796
-769	bornaddress	\N	\N	Fowey	GB	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	798
-770	bornaddress	\N	\N	Stoughton WI	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	800
-771	diedaddress	\N	\N	Knokke	BE	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	801
-772	organization	\N	\N	Lisbon	PT	{'bbox': None, 'type': 'Point', 'coordinates': (-8.5867977307, 39.5879315668)}	\N
-773	bornaddress	\N	\N	Avanca	PT	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	802
-774	bornaddress	\N	\N	Bloomsburg PA	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	804
-775	diedaddress	\N	\N	Fallston MD	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	804
-776	bornaddress	\N	\N	Griffen	AT	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	806
-777	bornaddress	\N	\N	Beirut	LB	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	807
-778	bornaddress	\N	\N	Shingu Ehime	JP	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	808
-779	diedaddress	\N	\N	Deerfield MA	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	809
-780	organization	\N	\N	Tempe AZ	US	{'bbox': None, 'type': 'Point', 'coordinates': (-112.4943339159, 45.6875333395)}	\N
-781	bornaddress	\N	\N	Glens Falls NY	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	810
-782	diedaddress	\N	\N	Paradise Valley AZ	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	810
-783	organization	\N	\N	Salt Lake City UT	US	{'bbox': None, 'type': 'Point', 'coordinates': (-112.4943339159, 45.6875333395)}	\N
-784	bornaddress	\N	\N	Verona	IT	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	812
-785	bornaddress	\N	\N	Superior WI	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	814
-786	bornaddress	\N	\N	Oceanside NY	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	815
-787	bornaddress	\N	\N	South Bend IN	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	816
-788	bornaddress	\N	\N	Trönö	SE	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	818
-789	bornaddress	\N	\N	Taktser	CN	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	819
-790	bornaddress	\N	\N	Aldea Chimel	GT	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	820
-791	bornaddress	\N	\N	Garding	DE	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	821
-792	diedaddress	\N	\N	Charlottenburg	DE	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	821
-793	bornaddress	\N	\N	Liestal	CH	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	822
-794	bornaddress	\N	\N	Kislovodsk	RU	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	823
-795	diedaddress	\N	\N	Troitse-Lykovo	RU	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	823
-796	bornaddress	\N	\N	Svartbjörnsbyn	SE	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	824
-797	organization	\N	\N	Louvain	BE	{'bbox': None, 'type': 'Point', 'coordinates': (4.6396699631, 50.6375465936)}	\N
-798	bornaddress	\N	\N	Longlier	BE	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	826
-799	bornaddress	\N	\N	Thames Ditton	GB	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	827
-800	diedaddress	\N	\N	Nethen	BE	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	827
-801	bornaddress	\N	\N	La Flèche	FR	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	829
-802	bornaddress	\N	\N	Uniontown PA	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	830
-803	bornaddress	\N	\N	Uskup (now Skopje)	MK	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	831
-804	bornaddress	\N	\N	Qunu	ZA	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	832
-805	bornaddress	\N	\N	Vishneva	BY	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	834
-806	bornaddress	\N	\N	Bad Salzbrunn	PL	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	835
-807	diedaddress	\N	\N	Agnetendorf (now Jagniatków)	PL	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	835
-808	diedaddress	\N	\N	Peredelkino	RU	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	836
-809	bornaddress	\N	\N	Masterton	NZ	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	837
-810	diedaddress	\N	\N	Drexel Hill PA	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	837
-811	bornaddress	\N	\N	Chabris	FR	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	838
-812	bornaddress	\N	\N	Hobart Tasmania	AU	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	839
-813	bornaddress	\N	\N	Springfield MA	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	841
-814	diedaddress	\N	\N	Manila	PH	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	841
-815	organization	\N	\N	Beckenham	GB	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	\N
-816	bornaddress	\N	\N	Tardebigg	GB	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	844
-817	diedaddress	\N	\N	Farnborough	GB	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	844
-818	organization	\N	\N	Tübingen	DE	{'bbox': None, 'type': 'Point', 'coordinates': (10.3817108727, 51.1062734358)}	\N
-819	bornaddress	\N	\N	Magdeburg	DE	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	845
-820	bornaddress	\N	\N	Whiting IN	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	846
-821	diedaddress	\N	\N	Menlo Park CL	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	846
-822	bornaddress	\N	\N	Lennep (now Remscheid)	DE	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	848
-823	diedaddress	\N	\N	Ipswich	GB	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	849
-824	bornaddress	\N	\N	Hofei Anhwei	CN	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	850
-825	organization	\N	\N	Pavia	IT	{'bbox': None, 'type': 'Point', 'coordinates': (12.0723891753, 42.7864450125)}	\N
-826	bornaddress	\N	\N	Corteno	IT	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	852
-827	bornaddress	\N	\N	Soignies	BE	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	853
-828	bornaddress	\N	\N	Lexington KY	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	854
-829	diedaddress	\N	\N	Mulrany	IE	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	855
-830	bornaddress	\N	\N	Koenigsberg (now Kaliningrad)	RU	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	856
-831	diedaddress	\N	\N	Poughkeepsie NY	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	856
-832	diedaddress	\N	\N	Needham MA	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	857
-833	bornaddress	\N	\N	Kumasi	GH	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	858
-834	bornaddress	\N	\N	Germiston	ZA	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	859
-835	organization	\N	\N	Bucksburn (Scotland)	GB	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	\N
-836	bornaddress	\N	\N	Sarajevo	BA	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	864
-837	organization	\N	\N	Bodmin	GB	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	\N
-838	bornaddress	\N	\N	Mitcham	GB	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	865
-839	diedaddress	\N	\N	Annandale VA	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	866
-840	organization	\N	\N	Martinsried	DE	{'bbox': None, 'type': 'Point', 'coordinates': (10.3817108727, 51.1062734358)}	\N
-841	bornaddress	\N	\N	Sumter SC	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	870
-842	bornaddress	\N	\N	Bad Kissingen	DE	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	872
-843	bornaddress	\N	\N	Den Helder	NL	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	874
-844	bornaddress	\N	\N	Waalwijk	NL	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	875
-845	diedaddress	\N	\N	Bilthoven	NL	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	875
-846	diedaddress	\N	\N	High Wycombe	GB	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	876
-847	bornaddress	\N	\N	Maastricht	NL	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	877
-848	bornaddress	\N	\N	Königshütte (now Chorzów)	PL	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	878
-849	bornaddress	\N	\N	Neuchâtel	CH	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	881
-850	bornaddress	\N	\N	Cardiff	GB	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	884
-851	bornaddress	\N	\N	Clinton NY	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	885
-852	bornaddress	\N	\N	Kilmaurs	GB	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	886
-853	diedaddress	\N	\N	Edzell	GB	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	886
-854	bornaddress	\N	\N	Mit Abu al-Kawm	EG	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	887
-855	bornaddress	\N	\N	Agrigento Sicily	IT	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	890
-856	bornaddress	\N	\N	Neuilly-sur-Seine	FR	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	891
-857	diedaddress	\N	\N	Bellême	FR	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	891
-858	bornaddress	\N	\N	Växjö	SE	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	892
-859	bornaddress	\N	\N	Veshenskaya	RU	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	893
-860	bornaddress	\N	\N	Iráklion	GR	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	894
-861	diedaddress	\N	\N	Benzonia MI	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	895
-862	diedaddress	\N	\N	Stapleford Cambridgeshire	GB	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	896
-863	bornaddress	\N	\N	Almora	IN	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	901
-864	diedaddress	\N	\N	Putney Heath	GB	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	901
-865	bornaddress	\N	\N	Alliston	CA	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	902
-866	diedaddress	\N	\N	Newfoundland	CA	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	902
-867	bornaddress	\N	\N	Zamora	MX	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	908
-868	bornaddress	\N	\N	Aurich	DE	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	909
-869	bornaddress	\N	\N	Nuoro Sardinia	IT	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	910
-870	bornaddress	\N	\N	Voronezh	RU	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	911
-871	bornaddress	\N	\N	Pointe-à-Pitre	GP	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	912
-872	diedaddress	\N	\N	Presqu'île-de-Giens	FR	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	912
-873	bornaddress	\N	\N	Casteldàwson	GB	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	913
-874	diedaddress	\N	\N	Gladwyne PA	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	914
-875	bornaddress	\N	\N	Halmstad	SE	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	918
-876	bornaddress	\N	\N	Lund	SE	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	919
-877	diedaddress	\N	\N	Ängelholm	SE	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	919
-878	diedaddress	\N	\N	Wakulla Springs State Park FL	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	920
-879	bornaddress	\N	\N	Hsinchu	TW	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	924
-880	diedaddress	\N	\N	Rockleigh NJ	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	925
-881	diedaddress	\N	\N	Coral Gables FL	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	927
-882	bornaddress	\N	\N	Canton SD	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	928
-883	diedaddress	\N	\N	Randolph NH	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	929
-884	bornaddress	\N	\N	Bradford	GB	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	930
-885	bornaddress	\N	\N	Atherton	AU	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	932
-886	organization	\N	\N	Yorktown Heights NY	US	{'bbox': None, 'type': 'Point', 'coordinates': (-112.4943339159, 45.6875333395)}	\N
-887	bornaddress	\N	\N	Batley	GB	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	935
-888	bornaddress	\N	\N	Champaign-Urbana IL	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	937
-889	bornaddress	\N	\N	Dippenhall	GB	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	938
-890	bornaddress	\N	\N	Vidisha	IN	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	939
-891	organization	\N	\N	Madison NJ	US	{'bbox': None, 'type': 'Point', 'coordinates': (-112.4943339159, 45.6875333395)}	\N
-892	bornaddress	\N	\N	Ramelton	IE	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	940
-893	bornaddress	\N	\N	Duluth MN	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	941
-894	bornaddress	\N	\N	Taunton MA	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	943
-895	diedaddress	\N	\N	Chesterfield MO	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	943
-896	bornaddress	\N	\N	Montclair NJ	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	944
-897	organization	\N	\N	Greenbelt MD	US	{'bbox': None, 'type': 'Point', 'coordinates': (-112.4943339159, 45.6875333395)}	\N
-898	bornaddress	\N	\N	Roanoke VA	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	946
-899	bornaddress	\N	\N	Stroud	GB	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	947
-900	organization	\N	\N	Jülich	DE	{'bbox': None, 'type': 'Point', 'coordinates': (10.3817108727, 51.1062734358)}	\N
-901	bornaddress	\N	\N	Plzen	CZ	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	949
-902	bornaddress	\N	\N	Morrison IL	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	953
-903	diedaddress	\N	\N	Santa Fe NM	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	954
-904	bornaddress	\N	\N	Bearsden	GB	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	955
-905	bornaddress	\N	\N	Suita	JP	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	958
-906	organization	\N	\N	Edmonton	CA	{'bbox': None, 'type': 'Point', 'coordinates': (-98.2945373672, 61.3765600742)}	\N
-907	bornaddress	\N	\N	Kubyshev (now Samara)	RU	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	961
-908	bornaddress	\N	\N	Ta'izz	YE	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	963
-909	bornaddress	\N	\N	Kibbutz Sde-Nahum	IL	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	964
-910	bornaddress	\N	\N	Ikata	JP	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	966
-911	bornaddress	\N	\N	Kronshtadt	RU	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	967
-912	bornaddress	\N	\N	Constantine	DZ	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	969
-913	bornaddress	\N	\N	Rostock	DE	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	972
-914	bornaddress	\N	\N	Bochum	DE	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	974
-915	bornaddress	\N	\N	Catanzaro	IT	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	976
-916	diedaddress	\N	\N	Moffett Field CA	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	977
-917	bornaddress	\N	\N	Wailacama	TL	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	978
-918	diedaddress	\N	\N	Châtenay	FR	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	979
-919	bornaddress	\N	\N	Kvikne	NO	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	980
-920	bornaddress	\N	\N	Olshammar	SE	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	981
-921	diedaddress	\N	\N	Övralid	SE	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	981
-922	diedaddress	\N	\N	Ketchum ID	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	982
-923	bornaddress	\N	\N	Reykjavik	IS	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	983
-924	bornaddress	\N	\N	Iria Flavia	ES	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	984
-925	bornaddress	\N	\N	Bnin (now Kórnik)	PL	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	985
-926	bornaddress	\N	\N	Raleigh NC	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	987
-927	bornaddress	\N	\N	Des Moines IA	US	{'bbox': None, 'type': 'Point', 'coordinates': (0.0, 0.0)}	988
-928	organization	\N	\N	Minneapolis MN	US	{'bbox': None, 'type': 'Point', 'coordinates': (-112.4943339159, 45.6875333395)}	\N
+COPY public.address (id, address_type, street, zip, city, country, person_id, lat, lon) FROM stdin;
+203	diedaddress	\N	\N	\N	NL	141	\N	\N
+717	bornaddress	\N	\N	's Graveland	NL	720	\N	\N
+908	bornaddress	\N	\N	Ta'izz	YE	963	13.5752242	44.0215268
+912	bornaddress	\N	\N	Constantine	DZ	969	36.3641642	6.6084281
+919	bornaddress	\N	\N	Kvikne	NO	980	61.5745535	9.5855817
+916	diedaddress	\N	\N	Moffett Field CA	US	977	37.3994101	-122.0750953
+922	diedaddress	\N	\N	Ketchum ID	US	982	43.680741	-114.363662
+917	bornaddress	\N	\N	Wailacama	TL	978	\N	\N
+902	bornaddress	\N	\N	Morrison IL	US	953	41.8094058	-89.9649496
+905	bornaddress	\N	\N	Suita	JP	958	34.764884	135.51735
+927	bornaddress	\N	\N	Des Moines IA	US	988	41.5910323	-93.6046655
+925	bornaddress	\N	\N	Bnin (now Kórnik)	PL	985	52.2233861	17.0961903
+915	bornaddress	\N	\N	Catanzaro	IT	976	38.9076353	16.5960465
+920	bornaddress	\N	\N	Olshammar	SE	981	58.7555403	14.7995023
+910	bornaddress	\N	\N	Ikata	JP	966	33.4896014	132.3560996
+903	diedaddress	\N	\N	Santa Fe NM	US	954	35.6876096	-105.938456
+923	bornaddress	\N	\N	Reykjavik	IS	983	64.145981	-21.9422367
+926	bornaddress	\N	\N	Raleigh NC	US	987	35.7803977	-78.6390989
+907	bornaddress	\N	\N	Kubyshev (now Samara)	RU	961	\N	\N
+928	organization	\N	\N	Minneapolis MN	US	\N	44.9772995	-93.2654692
+913	bornaddress	\N	\N	Rostock	DE	972	54.0886707	12.1400211
+906	organization	\N	\N	Edmonton	CA	\N	53.5462055	-113.491241
+924	bornaddress	\N	\N	Iria Flavia	ES	984	42.7487367	-8.6495728
+911	bornaddress	\N	\N	Kronshtadt	RU	967	60.01485565	29.69888219
+914	bornaddress	\N	\N	Bochum	DE	974	51.4818111	7.2196635
+918	diedaddress	\N	\N	Châtenay	FR	979	45.3211	5.22884
+921	diedaddress	\N	\N	Övralid	SE	981	55.5274389	13.0102698
+909	bornaddress	\N	\N	Kibbutz Sde-Nahum	IL	964	31.319908	34.615333
+904	bornaddress	\N	\N	Bearsden	GB	955	55.920461	-4.3332046
+888	bornaddress	\N	\N	Champaign-Urbana IL	US	937	40.104535	-88.272157
+889	bornaddress	\N	\N	Dippenhall	GB	938	51.2120604	-0.8359555
+394	bornaddress	\N	\N	Lorain OH	US	336	41.4673238	-82.1781904
+89	organization	\N	\N	Manchester	GB	\N	53.4794892	-2.2451148
+743	diedaddress	\N	\N	Sens	FR	760	48.1978559	3.282606
+340	bornaddress	\N	\N	Cairo	EG	275	30.0443879	31.2357257
+287	organization	\N	\N	Memphis TN	US	\N	35.1460249	-90.0517638
+579	bornaddress	\N	\N	Norrköping	SE	541	58.5909124	16.1903511
+626	bornaddress	\N	\N	Ried im Innkreis	AT	600	48.2085868	13.48839
+237	organization	\N	\N	Utrecht	NL	\N	52.0907006	5.1215634
+857	diedaddress	\N	\N	Bellême	FR	891	48.3753612	0.5629418
+446	bornaddress	\N	\N	Fulda	DE	389	50.5542328	9.6770448
+352	organization	\N	\N	Milan	IT	\N	45.4641943	9.1896346
+163	bornaddress	\N	\N	Banbury	GB	114	52.0601807	-1.3402795
+652	diedaddress	\N	\N	Grantchester	GB	645	52.179362	0.0932745
+58	diedaddress	\N	\N	Mexico City	MX	36	19.4326296	-99.1331785
+212	diedaddress	\N	\N	Berkeley CA	US	148	37.8708393	-122.272863
+18	bornaddress	\N	\N	Marietta OH	US	10	39.4167742	-81.4548392
+379	bornaddress	\N	\N	Hoechst	DE	319	50.2046172	9.2349882
+703	bornaddress	\N	\N	Pforzheim	DE	701	48.8908846	8.7029532
+41	organization	\N	\N	Providence RI	US	\N	41.8239891	-71.4128343
+783	organization	\N	\N	Salt Lake City UT	US	\N	40.7596198	-111.886797
+139	bornaddress	\N	\N	Würzburg	DE	98	49.79245	9.932966
+107	bornaddress	\N	\N	Pittsburgh PA	US	68	40.4416941	-79.9900861
+897	organization	\N	\N	Greenbelt MD	US	\N	39.004607	-76.8756838
+694	bornaddress	\N	\N	Cheetham Hill	GB	689	53.5032866	-2.2344764
+685	bornaddress	\N	\N	Gainesville FL	US	680	29.6519684	-82.3249846
+607	bornaddress	\N	\N	Wingham	CA	573	43.886245	-81.31275
+407	bornaddress	\N	\N	Turin	IT	347	45.0677551	7.6824892
+387	bornaddress	\N	\N	Derby	GB	325	52.9212617	-1.4761491
+451	organization	\N	\N	Schenectady NY	US	\N	42.8142432	-73.9395687
+695	bornaddress	\N	\N	Dewsbury	GB	690	53.6909103	-1.6302142
+521	bornaddress	\N	\N	Moguer	ES	471	37.2746182	-6.8373527
+504	diedaddress	\N	\N	El Cerrito CA	US	451	37.9154056	-122.301411
+705	bornaddress	\N	\N	Oranienburg	DE	705	52.7529379	13.2457591
+217	bornaddress	\N	\N	Aigle	CH	152	46.3179006	6.9688929
+816	bornaddress	\N	\N	Tardebigg	GB	844	\N	\N
+768	diedaddress	\N	\N	Bangalore	IN	796	12.9767936	77.590082
+484	diedaddress	\N	\N	Lambaréné	GA	433	-0.6942603	10.2236482
+879	bornaddress	\N	\N	Hsinchu	TW	924	24.8066333	120.9686833
+813	bornaddress	\N	\N	Springfield MA	US	841	42.1018764	-72.5886727
+551	diedaddress	\N	\N	Schopfheim	DE	506	47.6500525	7.8216997
+84	organization	\N	\N	Chapel Hill NC	US	\N	35.9131542	-79.05578
+43	bornaddress	\N	\N	Neuenkirchen	DE	26	52.4170589	7.8395319
+78	bornaddress	\N	\N	Grenå	DK	48	56.4134419	10.8793137
+273	organization	\N	\N	Mountain View CA	US	\N	37.3893889	-122.0832101
+778	bornaddress	\N	\N	Shingu Ehime	JP	808	33.948159	133.636449
+642	bornaddress	\N	\N	Augsburg	DE	626	48.3668041	10.8986971
+639	bornaddress	\N	\N	Kermanshah	IR	623	34.3239414	47.0735891
+9	diedaddress	\N	\N	Leningrad	RU	5	59.938732	30.316229
+536	organization	\N	\N	Breisgau	DE	\N	47.9960901	7.8494005
+471	bornaddress	\N	\N	Hoquiam WA	US	418	46.980929	-123.889335
+761	bornaddress	\N	\N	Mingora	PK	789	34.7725022	72.3606728
+357	bornaddress	\N	\N	Echternach	LU	297	49.8120961	6.4214859
+164	organization	\N	\N	Maine ME	US	\N	46.8200431	-67.9230792
+617	bornaddress	\N	\N	Warwick	GB	589	52.2814519	-1.5815742
+149	organization	\N	\N	Argonne IL	US	\N	38.623826	-90.1189726
+331	bornaddress	\N	\N	Bulawayo	ZW	268	-20.1560599	28.5887063
+859	bornaddress	\N	\N	Veshenskaya	RU	893	49.628994	41.725105
+749	bornaddress	\N	\N	Silkeborg	DK	771	56.169453	9.5495141
+376	bornaddress	\N	\N	Bellshill	GB	316	55.8189311	-4.0225794
+792	diedaddress	\N	\N	Charlottenburg	DE	821	52.515747	13.3096834
+347	bornaddress	\N	\N	Mount Vernon NY	US	285	40.9125085	-73.8386504
+817	diedaddress	\N	\N	Farnborough	GB	844	51.5367279	-1.3748299
+240	diedaddress	\N	\N	Woods Hole MA	US	172	41.5238207	-70.669259
+75	bornaddress	\N	\N	Strehlen (now Strzelin)	PL	47	\N	\N
+437	bornaddress	\N	\N	Montreal	CA	378	45.5031824	-73.5698065
+143	bornaddress	\N	\N	the Hague	NL	100	52.0799838	4.3113461
+1	organization	\N	\N	Tsukuba	JP	\N	36.0833265	140.077279
+739	bornaddress	\N	\N	Dili	TL	756	-8.5536809	125.5784093
+200	diedaddress	\N	\N	Palm Desert CA	US	139	33.7288179	-116.382571
+313	bornaddress	\N	\N	Bahia Blanca	AR	246	-38.7176522	-62.2654871
+40	diedaddress	\N	\N	Berlin	DE	24	52.5170365	13.3888599
+555	bornaddress	\N	\N	Bremerhaven-Lehe	DE	510	53.5667574	8.6006
+398	organization	\N	\N	St. Louis MO	US	\N	38.6280278	-90.1910154
+606	bornaddress	\N	\N	Council ID	US	571	44.728532	-116.4364818
+166	bornaddress	\N	\N	Newton-le-Willows	GB	117	53.4530667	-2.6263483
+741	bornaddress	\N	\N	Karlbo	SE	759	59.5060154	16.3275259
+600	diedaddress	\N	\N	Mülheim	DE	562	50.4492865	6.6829919
+153	diedaddress	\N	\N	Tours	FR	107	47.3900474	0.6889268
+171	bornaddress	\N	\N	Ann Arbor MI	US	119	42.2681569	-83.7312291
+619	diedaddress	\N	\N	Focsani	RO	591	45.697274	27.1856921
+566	bornaddress	\N	\N	Fosnavåg	NO	524	62.3421061	5.6342433
+733	bornaddress	\N	\N	Dabrovica	PL	744	\N	\N
+439	bornaddress	\N	\N	St. Columb Minor	GB	379	50.4212397	-5.0428584
+174	bornaddress	\N	\N	Belfast	GB	121	54.596391	-5.9301829
+411	organization	\N	\N	Greifswald	DE	\N	54.095791	13.3815238
+348	diedaddress	\N	\N	Palo Alto CA	US	285	37.4443293	-122.1598465
+106	organization	\N	\N	Rochester MN	US	\N	44.0234387	-92.4630182
+597	bornaddress	\N	\N	Yukon FL	US	560	30.2346844	-81.6981513
+135	organization	\N	\N	Hertfordshire	GB	\N	51.95686495	-0.2230509078
+665	bornaddress	\N	\N	Hollerich	LU	658	49.5983299	6.1228061
+326	diedaddress	\N	\N	Lewes East Sussex	GB	262	50.8746139	0.005115324111
+48	diedaddress	\N	\N	Freiburg im Breisgau	DE	28	47.9960901	7.8494005
+489	diedaddress	\N	\N	Bornheim-Merten	DE	437	50.7754718	6.9230645
+69	bornaddress	\N	\N	Carcassonne	FR	42	43.2130358	2.3491069
+431	bornaddress	\N	\N	Londonderry	GB	372	54.9978678	-7.3213056
+449	organization	\N	\N	Grenoble	FR	\N	45.1875602	5.7357819
+385	diedaddress	\N	\N	Kingston upon Thames	GB	324	51.4096275	-0.3062621
+681	bornaddress	\N	\N	Norwich	GB	676	52.6285576	1.2923954
+182	bornaddress	\N	\N	Milwaukee WI	US	129	43.0349931	-87.922497
+851	bornaddress	\N	\N	Clinton NY	US	885	43.0484029	-75.3785034
+209	organization	\N	\N	Liverpool	GB	\N	53.4071991	-2.99168
+691	bornaddress	\N	\N	Caracas	VE	686	10.5060934	-66.9146008
+861	diedaddress	\N	\N	Benzonia MI	US	895	44.621389	-86.099258
+847	bornaddress	\N	\N	Maastricht	NL	877	50.8512438	5.6909768
+62	diedaddress	\N	\N	Blacksburg VA	US	38	37.2296566	-80.4136767
+801	bornaddress	\N	\N	La Flèche	FR	829	47.6968408	-0.0746149
+603	diedaddress	\N	\N	Wickenberg AZ	US	565	33.9610673	-112.7139697
+429	bornaddress	\N	\N	Corvallis OR	US	366	44.5645659	-123.2620435
+12	diedaddress	\N	\N	Cambridge	GB	6	52.2055314	0.1186637
+310	bornaddress	\N	\N	Gaffken (now Parusnoye)	RU	243	\N	\N
+297	bornaddress	\N	\N	Detroit MI	US	230	42.3315509	-83.0466403
+79	organization	\N	\N	Leiden	NL	\N	52.1594747	4.4908843
+877	diedaddress	\N	\N	Ängelholm	SE	919	57.9331049	16.6165067
+514	bornaddress	\N	\N	Landskrona	SE	462	55.8698007	12.8296734
+524	diedaddress	\N	\N	Santiago	CL	473	-33.4377756	-70.6504502
+312	bornaddress	\N	\N	Breslau (now Wroclaw)	PL	244	\N	\N
+228	bornaddress	\N	\N	Buczacz (now Buchach)	UA	165	\N	\N
+155	bornaddress	\N	\N	Frankfurt-on-the-Main	DE	108	50.041821	8.584764
+61	bornaddress	\N	\N	Murfreesboro TN	US	38	35.8460396	-86.3921096
+96	diedaddress	\N	\N	Wilmette IL	US	60	42.0757315	-87.7193768
+415	organization	\N	\N	Holmdel NJ	US	\N	40.4137058	-74.14503975
+351	diedaddress	\N	\N	Great Missenden	GB	288	51.7046508	-0.7086592
+699	bornaddress	\N	\N	Istanbul	TR	696	41.0091982	28.9662187
+770	bornaddress	\N	\N	Stoughton WI	US	800	42.9167389	-89.2178997
+306	organization	\N	\N	Aarhus	DK	\N	56.1496278	10.2134046
+655	diedaddress	\N	\N	Cresskill NJ	US	647	40.9414874	-73.9593041
+523	bornaddress	\N	\N	Parral	CL	473	-36.1414293	-71.8222221
+282	bornaddress	\N	\N	Jämshög	SE	216	56.2412875	14.5319796
+7	organization	\N	\N	St. Petersburg	RU	\N	59.938732	30.316229
+767	bornaddress	\N	\N	Tiruchirappalli	IN	796	10.804973	78.6870296
+176	bornaddress	\N	\N	Woodstock	GB	124	51.8942879	-4.8765902
+133	bornaddress	\N	\N	Changchun	CN	89	47.7303574	125.6617719
+384	bornaddress	\N	\N	Newark	GB	324	53.0736266	-0.8005422346
+708	organization	\N	\N	Marburg	DE	\N	50.8090106	8.7704695
+380	bornaddress	\N	\N	Cologne	DE	320	50.938361	6.959974
+795	diedaddress	\N	\N	Troitse-Lykovo	RU	823	55.786643	37.404236
+589	organization	\N	\N	Nashville TN	US	\N	36.1622767	-86.7742984
+235	organization	\N	\N	Gothenburg	SE	\N	57.7072326	11.9670171
+292	bornaddress	\N	\N	Logan UT	US	225	41.7313063	-111.834914
+147	diedaddress	\N	\N	La Jolla CA	US	103	32.8401623	-117.2740777
+244	diedaddress	\N	\N	Burlington MA	US	174	44.4761601	-73.212906
+97	organization	\N	\N	Kingston	CA	\N	44.230687	-76.481323
+793	bornaddress	\N	\N	Liestal	CH	822	47.4839723	7.7347783
+679	bornaddress	\N	\N	Farsø	DK	673	56.7722256	9.3399599
+280	bornaddress	\N	\N	Kobiele Wielkie	PL	215	51.0304056	19.6243691
+541	bornaddress	\N	\N	Pfaffendorf	DE	494	50.0186699	11.1824318
+425	bornaddress	\N	\N	Delaware OH	US	363	40.299424	-83.073697
+256	bornaddress	\N	\N	Glasgow	GB	187	55.861155	-4.2501687
+83	diedaddress	\N	\N	Seattle WA	US	50	47.6038321	-122.330062
+638	bornaddress	\N	\N	Bad Cannstatt	DE	622	48.8048828	9.2146797
+690	bornaddress	\N	\N	Medicine Hat Alberta	CA	685	50.04303	-110.679016
+187	bornaddress	\N	\N	Lethbridge Alberta	CA	132	49.6945782	-112.8331033
+580	diedaddress	\N	\N	Djursholm	SE	541	59.3973535	18.0880625
+759	bornaddress	\N	\N	Augusta GA	US	785	33.4709714	-81.9748429
+650	bornaddress	\N	\N	South Norwalk CT	US	643	41.0937079	-73.4187303
+199	bornaddress	\N	\N	Chester VT	US	139	43.2629706	-72.5945649
+613	bornaddress	\N	\N	Colchester	GB	578	51.8896903	0.8994651
+152	bornaddress	\N	\N	Menin	BE	107	50.7937353	3.167040611
+284	bornaddress	\N	\N	Timmins ON	CA	219	48.477473	-81.330414
+400	bornaddress	\N	\N	Platteville WI	US	340	42.7342942	-90.4784451
+393	diedaddress	\N	\N	Croydon	GB	332	51.3713049	-0.101957
+433	diedaddress	\N	\N	Vevey	CH	373	46.4602978	6.8418655
+320	diedaddress	\N	\N	Milton Keynes	GB	257	52.0406502	-0.7594092
+193	bornaddress	\N	\N	Vukovar	HR	136	45.3444094	19.002376
+525	bornaddress	\N	\N	Leoncin	PL	474	52.3936382	20.534073
+355	diedaddress	\N	\N	Castillon-du-Gard	FR	292	43.9706254	4.554361
+485	bornaddress	\N	\N	Popowo	PL	434	53.6205886	22.4001881
+480	bornaddress	\N	\N	Landsberg	DE	430	51.5253758	12.1624395
+44	organization	\N	\N	Nancy	FR	\N	48.6937223	6.1834097
+594	diedaddress	\N	\N	Del Mar CA	US	558	32.9594891	-117.2653146
+266	bornaddress	\N	\N	Ainay-le-Château	FR	199	46.7115	2.69393
+464	diedaddress	\N	\N	Gros-Islet	LC	409	14.0801333	-60.9524988
+849	bornaddress	\N	\N	Neuchâtel	CH	881	46.9895828	6.9292641
+20	bornaddress	\N	\N	Fürth	DE	11	49.4772475	10.9893626
+172	bornaddress	\N	\N	Jönköping	SE	120	57.7825634	14.165719
+734	bornaddress	\N	\N	Goldschmieden near Breslau	PL	746	\N	\N
+513	bornaddress	\N	\N	Dungarvan	IE	461	52.0897488	-7.6210306
+662	organization	\N	\N	Cold Spring Harbor NY	US	\N	40.8714873	-73.456788
+659	organization	\N	\N	Palaiseau	FR	\N	48.7144587	2.2453842
+564	bornaddress	\N	\N	Honolulu HI	US	522	21.2891309	-157.7173915
+596	bornaddress	\N	\N	Kalgoorlie	AU	559	-30.7464139	121.473223
+688	bornaddress	\N	\N	Wahoo NE	US	684	41.2111084	-96.6197985
+853	diedaddress	\N	\N	Edzell	GB	886	56.8099863	-2.6558539
+728	bornaddress	\N	\N	Olten	CH	736	47.3496571	7.903787
+409	organization	\N	\N	Kashiwa	JP	\N	35.8676218	139.9756876
+17	diedaddress	\N	\N	Contra	CH	8	46.1883815	8.8397143
+727	bornaddress	\N	\N	Kharkov (now Kharkiv)	UA	734	\N	\N
+678	diedaddress	\N	\N	Roquebrune-Cap-Martin	FR	672	43.7641047	7.4565697
+517	diedaddress	\N	\N	Lakeville CT	US	464	41.954966	-73.446313
+820	bornaddress	\N	\N	Whiting IN	US	846	41.6797578	-87.4944873
+773	bornaddress	\N	\N	Avanca	PT	802	40.8062105	-8.5729444
+757	bornaddress	\N	\N	Skattungbyn	SE	781	61.1857383	14.8481986
+227	diedaddress	\N	\N	Hempstead NY	US	164	40.7092836	-73.6230362
+895	diedaddress	\N	\N	Chesterfield MO	US	943	38.661953	-90.5643258
+701	diedaddress	\N	\N	Wayland MA	US	699	42.3632063	-71.3606721
+344	diedaddress	\N	\N	Messelhausen	DE	281	49.5754531	9.788308
+32	organization	\N	\N	Boston MA	US	\N	42.3554334	-71.060511
+875	bornaddress	\N	\N	Halmstad	SE	918	56.6739826	12.8574827
+558	bornaddress	\N	\N	Trelleck	GB	516	51.7450901	-2.7244457
+322	bornaddress	\N	\N	Ridgeville IN	US	259	40.2892107	-85.028857
+647	bornaddress	\N	\N	Atlanta GA	US	632	33.7489924	-84.3902644
+878	diedaddress	\N	\N	Wakulla Springs State Park FL	US	920	40.12135415	-88.92418096
+684	bornaddress	\N	\N	Lillebonne	FR	679	49.5188282	0.534411
+634	bornaddress	\N	\N	Calw	DE	613	48.7112108	8.7452043
+110	organization	\N	\N	Ithaca NY	US	\N	42.4396039	-76.4968019
+179	bornaddress	\N	\N	Gary IN	US	127	41.6020962	-87.3370647
+503	bornaddress	\N	\N	Redondo Beach CA	US	451	33.8455911	-118.3886766
+856	bornaddress	\N	\N	Neuilly-sur-Seine	FR	891	48.884683	2.2695658
+114	organization	\N	\N	Heidelberg	DE	\N	49.4093582	8.694724
+304	diedaddress	\N	\N	Salem NJ	US	237	39.5717796	-75.4671423
+42	organization	\N	\N	Rüschlikon	CH	\N	47.307465	8.5546421
+623	organization	\N	\N	Durham NC	US	\N	35.996653	-78.9018053
+267	bornaddress	\N	\N	Yonkers NY	US	201	40.9312099	-73.8987469
+479	diedaddress	\N	\N	Bandol	FR	427	43.1357717	5.7523647
+263	organization	\N	\N	Munster	DE	\N	52.9877613	10.0859882
+311	organization	\N	\N	Edinburgh	GB	\N	55.9533456	-3.1883749
+24	bornaddress	\N	\N	Tananarive (now Antananarivo)	MG	14	\N	\N
+744	bornaddress	\N	\N	Smyrna (now Izmir)	TR	761	38.4629545	27.17729008
+570	bornaddress	\N	\N	Denver CO	US	528	39.7392364	-104.984862
+894	bornaddress	\N	\N	Taunton MA	US	943	41.9019257	-71.0931485
+883	diedaddress	\N	\N	Randolph NH	US	929	44.375156	-71.2815661
+349	bornaddress	\N	\N	Rotterdam	NL	286	51.9244424	4.47775
+47	bornaddress	\N	\N	Budapest	HU	28	47.4978918	19.0401609
+812	bornaddress	\N	\N	Hobart Tasmania	AU	839	-42.8825088	147.3281233
+785	bornaddress	\N	\N	Superior WI	US	814	46.7207737	-92.1040796
+8	bornaddress	\N	\N	Ryazan	RU	5	54.6295687	39.7425039
+824	bornaddress	\N	\N	Hofei Anhwei	CN	850	\N	\N
+872	diedaddress	\N	\N	Presqu'île-de-Giens	FR	912	43.0393732	6.1020135
+565	organization	\N	\N	Trondheim	NO	\N	63.4304475	10.3952118
+257	organization	\N	\N	West Lafayette IN	US	\N	40.4258686	-86.9080655
+831	diedaddress	\N	\N	Poughkeepsie NY	US	856	41.7065539	-73.9283672
+381	bornaddress	\N	\N	Walkerton IN	US	321	41.4667113	-86.4830681
+698	bornaddress	\N	\N	Swansea	GB	695	51.6195955	-3.9459248
+396	organization	\N	\N	Tunis	TN	\N	36.8002068	10.1857757
+746	bornaddress	\N	\N	Springs	ZA	762	-26.243056	28.431667
+473	bornaddress	\N	\N	Stuttgart	DE	420	48.7784485	9.1800132
+682	diedaddress	\N	\N	Rumson NJ	US	677	40.372054	-73.9990269
+871	bornaddress	\N	\N	Pointe-à-Pitre	GP	912	\N	\N
+2	bornaddress	\N	\N	Nagoya	JP	1	35.1851045	136.8998438
+774	bornaddress	\N	\N	Bloomsburg PA	US	804	41.0044958	-76.4537302
+131	bornaddress	\N	\N	Bluefield WV	US	88	37.2698395	-81.2223195
+562	bornaddress	\N	\N	Leningrad (now St. Petersburg)	RU	519	\N	\N
+869	bornaddress	\N	\N	Nuoro Sardinia	IT	910	40.3210601	9.3297339
+414	bornaddress	\N	\N	Baku	AZ	353	40.3755885	49.8328009
+307	bornaddress	\N	\N	Lemvig	DK	239	56.5486971	8.3046456
+724	bornaddress	\N	\N	Missoula MT	US	730	46.8701049	-113.995267
+586	bornaddress	\N	\N	Skedsmo	NO	553	59.7830858	11.4626292
+511	bornaddress	\N	\N	Glencorse	GB	460	55.8544964	-3.2076147
+454	organization	\N	\N	Nottingham	GB	\N	52.9534193	-1.1496461
+423	bornaddress	\N	\N	San José CA	US	362	37.3361663	-121.890591
+716	diedaddress	\N	\N	Belgrade	RS	717	44.8178131	20.4568974
+483	bornaddress	\N	\N	Kaysersberg	FR	433	48.1571873	7.241094009
+622	bornaddress	\N	\N	Mukawa	JP	594	42.5748177	141.9268704
+463	bornaddress	\N	\N	Sevilla	ES	408	37.3886303	-5.9953403
+818	organization	\N	\N	Tübingen	DE	\N	48.5236164	9.0535531
+614	bornaddress	\N	\N	Agen	FR	579	44.2015827	0.6176112
+386	organization	\N	\N	Beverly MA	US	\N	42.5584284	-70.8800491
+202	bornaddress	\N	\N	Arnhem	NL	141	51.984257	5.9108573
+259	bornaddress	\N	\N	Zusamaltheim	DE	191	48.5299593	10.6370205
+383	diedaddress	\N	\N	Newport Beach CA	US	323	33.6170092	-117.9294401
+371	bornaddress	\N	\N	Pottsville PA	US	310	40.6851324	-76.1953701
+249	diedaddress	\N	\N	Leuven	BE	180	50.879202	4.7011675
+95	bornaddress	\N	\N	Enterprise OR	US	60	45.4258114	-117.278012
+545	diedaddress	\N	\N	Tallahassee FL	US	499	30.4380832	-84.2809332
+512	diedaddress	\N	\N	Carlops	GB	460	55.790192	-3.339839
+100	organization	\N	\N	Kiel	DE	\N	54.3227085	10.135555
+549	diedaddress	\N	\N	Baden-Baden	DE	503	48.7610716	8.239959
+186	organization	\N	\N	Hamilton Ontario	CA	\N	43.2560802	-79.8728583
+37	diedaddress	\N	\N	Stockholm	SE	23	59.3251172	18.0710935
+522	diedaddress	\N	\N	San Juan	PR	471	18.46633	-66.10572
+19	diedaddress	\N	\N	Evanston IL	US	10	42.0447388	-87.6930459
+321	diedaddress	\N	\N	Orsay	FR	258	48.699184	2.187457
+369	bornaddress	\N	\N	Castries	LC	309	14.0095966	-60.9902359
+550	organization	\N	\N	Mainz	DE	\N	50.0012314	8.2762513
+346	bornaddress	\N	\N	Amsterdam	NL	283	52.3730796	4.8924534
+28	bornaddress	\N	\N	Uddingston	GB	16	55.8189569	-4.0824857
+447	bornaddress	\N	\N	Wigton	GB	390	54.8246802	-3.1610942
+238	bornaddress	\N	\N	Nijkerk	NL	171	52.21485365	5.478146324
+105	organization	\N	\N	Buenos Aires	AR	\N	-34.6075682	-58.4370894
+404	organization	\N	\N	College Park MD	US	\N	38.980666	-76.9369189
+289	organization	\N	\N	Long Island New York NY	US	\N	40.753453	-73.9364
+125	bornaddress	\N	\N	Stavanger	NO	84	58.9699675	5.7318101
+434	bornaddress	\N	\N	Sauk Centre MN	US	374	45.737465	-94.9525216
+787	bornaddress	\N	\N	South Bend IN	US	816	41.6833813	-86.2500066
+781	bornaddress	\N	\N	Glens Falls NY	US	810	43.309941	-73.644447
+213	bornaddress	\N	\N	Toyohashi	JP	149	34.769123	137.391461
+769	bornaddress	\N	\N	Fowey	GB	798	50.3357786	-4.6365952
+335	bornaddress	\N	\N	Fredericia	DK	272	55.565268	9.7562169
+356	bornaddress	\N	\N	Chidambaram Tamil Nadu	IN	296	11.3994826	79.6909383
+80	bornaddress	\N	\N	Semarang	ID	49	-6.9903988	110.4229104
+800	diedaddress	\N	\N	Nethen	BE	827	50.7838206	4.675492
+242	diedaddress	\N	\N	San Diego CA	US	173	32.7174202	-117.1627728
+145	organization	\N	\N	Washington D.C.	US	\N	38.8950368	-77.0365427
+704	bornaddress	\N	\N	Tonbridge	GB	704	51.1889529	0.2735876
+134	diedaddress	\N	\N	Shenyang	CN	89	41.8026095	123.4279105
+486	bornaddress	\N	\N	Roholte	DK	435	55.1950318	12.0900786
+653	bornaddress	\N	\N	Sterling IL	US	646	41.788253	-89.6953656
+221	bornaddress	\N	\N	St. Paul MN	US	156	44.9497487	-93.0931028
+119	diedaddress	\N	\N	Randallstown MD	US	78	39.36909865	-76.79584213
+898	bornaddress	\N	\N	Roanoke VA	US	946	37.270973	-79.9414313
+574	bornaddress	\N	\N	Niagara Falls	CA	533	43.1065603	-79.0639039
+707	bornaddress	\N	\N	Provo UT	US	708	40.2337289	-111.6587085
+216	organization	\N	\N	Lausanne	CH	\N	46.5218269	6.6327025
+726	bornaddress	\N	\N	Pleasanton CA	US	733	37.6624312	-121.8746789
+120	bornaddress	\N	\N	Neudorf	CA	80	50.7136022	-103.0120907
+742	bornaddress	\N	\N	Mondovi	DZ	760	36.6851201	7.7470888
+35	organization	\N	\N	Uppsala	SE	\N	59.8586126	17.6387436
+643	diedaddress	\N	\N	Falmouth MA	US	627	41.5514979	-70.6147519
+543	organization	\N	\N	Harwell Berkshire	GB	\N	51.601871	-1.290588
+151	organization	\N	\N	Rueil-Malmaison	FR	\N	48.87778	2.1802832
+16	bornaddress	\N	\N	Melbourne	AU	8	-37.8142454	144.9631732
+6	bornaddress	\N	\N	Arad	RO	3	46.1753793	21.3196342
+766	bornaddress	\N	\N	Widnes	GB	795	53.3646888	-2.7283328
+645	bornaddress	\N	\N	Næstved	DK	629	55.2328252	11.7674102
+294	diedaddress	\N	\N	Truro NS	CA	227	45.366668	-63.300006
+25	diedaddress	\N	\N	Paris	FR	14	48.8534951	2.3483915
+126	diedaddress	\N	\N	Oslo	NO	84	59.9133301	10.7389701
+372	organization	\N	\N	Columbia	US	\N	34.0007493	-81.0343313
+364	diedaddress	\N	\N	Lucerne	CH	303	47.0505452	8.3054682
+651	bornaddress	\N	\N	Hampstead	GB	645	51.55653	-0.1783011
+450	diedaddress	\N	\N	Brive-Corrèze	FR	392	45.156197	1.500454
+738	organization	\N	\N	Bronx NY	US	\N	40.8466508	-73.8785937
+501	bornaddress	\N	\N	Ishpeming MI	US	450	46.488547	-87.667636
+585	bornaddress	\N	\N	Privolnoye	RU	552	45.920673	41.304665
+775	diedaddress	\N	\N	Fallston MD	US	804	39.53484305	-76.42210642
+516	bornaddress	\N	\N	Orange NJ	US	464	40.7706562	-74.2326463
+177	bornaddress	\N	\N	Danzig (now Gdansk)	PL	126	\N	\N
+552	bornaddress	\N	\N	Schroda	PL	507	52.2284266	17.277827
+435	bornaddress	\N	\N	Bordeaux	FR	375	44.841225	-0.5800364
+755	bornaddress	\N	\N	Hillsboro WV	US	778	38.1354376	-80.2131296
+880	diedaddress	\N	\N	Rockleigh NJ	US	925	41.0003754	-73.9304141
+472	bornaddress	\N	\N	York PA	US	419	39.9624662	-76.727729
+810	diedaddress	\N	\N	Drexel Hill PA	US	837	39.9470567	-75.2921301
+563	bornaddress	\N	\N	Mokpo	KR	520	34.7903335	126.3847547
+201	bornaddress	\N	\N	Methuen MA	US	140	42.7262016	-71.1908924
+482	bornaddress	\N	\N	Fareham	GB	432	50.8526637	-1.1783134
+838	bornaddress	\N	\N	Mitcham	GB	865	51.4058006	-0.1640787
+150	diedaddress	\N	\N	Newton MA	US	106	42.3370414	-71.2092214
+575	diedaddress	\N	\N	Rockville MD	US	535	39.0817985	-77.1516844
+776	bornaddress	\N	\N	Griffen	AT	806	46.7038006	14.7308073
+702	bornaddress	\N	\N	Aberdeen WA	US	700	46.975371	-123.815722
+410	bornaddress	\N	\N	Higashimatsuyama	JP	350	36.0421523	139.399796
+170	organization	\N	\N	Ashburn VA	US	\N	39.0300191	-77.46964647
+438	diedaddress	\N	\N	Brookline MA	US	378	42.3317642	-71.1211635
+498	diedaddress	\N	\N	Starnberg	DE	447	48.0001038	11.3508972
+553	bornaddress	\N	\N	Visalia CA	US	508	36.3302284	-119.292058
+270	bornaddress	\N	\N	Dieppe	FR	203	49.9246182	1.0791444
+670	bornaddress	\N	\N	Sorau (now Zory)	PL	661	\N	\N
+264	bornaddress	\N	\N	Lagow	PL	198	50.7754877	21.0839837
+70	bornaddress	\N	\N	Briesen (now Wąbrzeźno)	PL	43	\N	\N
+475	bornaddress	\N	\N	Strelno (now Strzelno)	PL	423	\N	\N
+428	organization	\N	\N	Boulder CO	US	\N	40.14159065	-105.4736561
+112	bornaddress	\N	\N	Eastbourne	GB	73	50.7664372	0.2781546
+661	bornaddress	\N	\N	Hartford CT	US	653	41.765566	-72.690228
+418	bornaddress	\N	\N	Cluny	GB	358	57.197856	-2.5007314
+713	bornaddress	\N	\N	Tabuse	JP	715	33.9548389	132.0411783
+22	bornaddress	\N	\N	Hämeenkyrö	FI	13	61.633333	23.2
+590	bornaddress	\N	\N	Burlingame KS	US	556	38.7538947	-95.8349868
+184	bornaddress	\N	\N	Haverhill MA	US	130	42.7777829	-71.0767724
+870	bornaddress	\N	\N	Voronezh	RU	911	51.6605982	39.2005858
+368	bornaddress	\N	\N	Abeokuta	NG	308	7.1547129	3.3467344
+445	bornaddress	\N	\N	Nitzkydorf Banat	RO	387	\N	\N
+515	bornaddress	\N	\N	Sainte-Foy-lès-Lyon	FR	463	45.7362255	4.7934767
+683	bornaddress	\N	\N	Sacramento CA	US	678	38.5810606	-121.493895
+500	diedaddress	\N	\N	Arlington VA	US	448	38.88914535	-77.09111151
+159	bornaddress	\N	\N	Hildesheim	DE	111	52.1521636	9.9513046
+214	bornaddress	\N	\N	Aarberg	CH	150	47.0443346	7.2753004
+389	bornaddress	\N	\N	Sochi	RU	328	43.5854823	39.723109
+608	bornaddress	\N	\N	Chiran	JP	574	31.3792701	130.4433045
+46	diedaddress	\N	\N	Lyon	FR	27	45.7578137	4.8320114
+712	bornaddress	\N	\N	Luarca	ES	713	43.5439003	-6.5357408
+136	bornaddress	\N	\N	Vyartsilya Karelia	RU	94	62.17645	30.69296
+876	bornaddress	\N	\N	Lund	SE	919	55.7029296	13.1929449
+569	diedaddress	\N	\N	Blue Point NY	US	527	40.7439872	-73.0345539
+668	bornaddress	\N	\N	Bloomington IL	US	660	40.47707	-88.956459
+495	bornaddress	\N	\N	Halifax	GB	444	53.7229229	-1.8604874
+453	diedaddress	\N	\N	Palma Majorca	ES	395	39.575748	2.656644
+169	bornaddress	\N	\N	Gränichen	CH	118	47.3592835	8.0971009
+309	bornaddress	\N	\N	Görlitz	DE	241	51.1563185	14.991018
+591	diedaddress	\N	\N	Miami FL	US	556	25.7741728	-80.19362
+57	bornaddress	\N	\N	Aracataca	CO	36	10.5906011	-74.1876803
+436	bornaddress	\N	\N	Dublin	IE	376	53.3493795	-6.2605593
+260	bornaddress	\N	\N	Monrovia	LR	192	6.328034	-10.797788
+542	bornaddress	\N	\N	Wooster OH	US	495	40.7980976	-81.9397733
+301	diedaddress	\N	\N	White Plains NY	US	236	41.0339862	-73.7629097
+323	diedaddress	\N	\N	Salamanca	ES	259	40.9651572	-5.6640182
+487	diedaddress	\N	\N	Klotzsche	DE	435	51.1186284	13.7781539
+587	bornaddress	\N	\N	Vitebsk Belorussia	BY	554	55.1930197	30.2070437
+161	bornaddress	\N	\N	Auburn AL	US	112	32.600943	-85.481309
+406	bornaddress	\N	\N	Chittagong	BD	346	22.333778	91.8344348
+318	bornaddress	\N	\N	Zhejiang Ningbo	CN	253	29.8622194	121.6203873
+239	organization	\N	\N	Szeged	HU	\N	46.2546312	20.1486016
+194	bornaddress	\N	\N	Portland OR	US	137	45.5202471	-122.674194
+882	bornaddress	\N	\N	Canton SD	US	928	43.3009156	-96.5926411
+765	bornaddress	\N	\N	Zonnemaire	NL	794	51.7129045	3.9517495
+102	diedaddress	\N	\N	Philadelphia PA	US	64	39.9527237	-75.1635262
+290	bornaddress	\N	\N	Owosso MI	US	224	42.9975968	-84.1720541
+73	bornaddress	\N	\N	Bradford MA	US	45	43.270206	-71.960449
+388	bornaddress	\N	\N	Viipuri (now Vyborg)	FI	327	\N	\N
+39	bornaddress	\N	\N	Hamburg	DE	24	53.550341	10.000654
+737	bornaddress	\N	\N	Columbus OH	US	752	39.9622601	-83.0007065
+636	bornaddress	\N	\N	Renton WA	US	617	47.4799078	-122.2034496
+63	organization	\N	\N	Santa Barbara CA	US	\N	34.4221319	-119.702667
+417	bornaddress	\N	\N	Nelson	NZ	355	-41.2710849	173.2836756
+868	bornaddress	\N	\N	Aurich	DE	909	53.4695604	7.4823808
+641	bornaddress	\N	\N	Dijon	FR	625	47.3215806	5.0414701
+675	bornaddress	\N	\N	Ludwigsburg	DE	667	48.8953937	9.1895147
+443	bornaddress	\N	\N	Gelsenkirchen	DE	385	51.5110321	7.0960124
+822	bornaddress	\N	\N	Lennep (now Remscheid)	DE	848	51.19158665	7.267563234
+752	bornaddress	\N	\N	Ghent	BE	776	51.0538286	3.7250121
+535	bornaddress	\N	\N	Mumbai	IN	486	19.0785451	72.878176
+158	organization	\N	\N	Sheffield	GB	\N	53.3806626	-1.4702278
+329	bornaddress	\N	\N	Leicester	GB	265	52.6362	-1.1331969
+316	bornaddress	\N	\N	Hamamatsu	JP	251	34.7109786	137.7259431
+680	bornaddress	\N	\N	Leggiuno-Sangiano	IT	674	45.876535	8.618427
+627	bornaddress	\N	\N	Chaguanas	TT	601	10.5147394	-61.4076757
+50	bornaddress	\N	\N	Vienna	AT	30	48.2083537	16.3725042
+735	bornaddress	\N	\N	Omaha NE	US	748	41.2587459	-95.9383758
+293	bornaddress	\N	\N	Amherst NS	CA	227	45.8286903	-64.2040548
+226	bornaddress	\N	\N	Vicuña	CL	164	-30.0340482	-70.7126702
+219	bornaddress	\N	\N	Sulechów	PL	154	52.0854782	15.6259091
+819	bornaddress	\N	\N	Magdeburg	DE	845	52.1315889	11.6399609
+544	bornaddress	\N	\N	Oak Park IL	US	499	41.8878145	-87.7887615
+302	organization	\N	\N	Wilmington DE	US	\N	39.7459468	-75.546589
+91	organization	\N	\N	Murray Hill NJ	US	\N	40.6953793	-74.4009849
+592	organization	\N	\N	Altenberg; Grünau im Almtal	AT	\N	47.855792	13.954927
+251	bornaddress	\N	\N	Kalundborg	DK	182	55.6833793	11.0993619
+279	diedaddress	\N	\N	Hanoi	VN	212	21.0283334	105.854041
+432	bornaddress	\N	\N	Wola Okrzejska	PL	373	51.7490356	22.1354431
+468	bornaddress	\N	\N	Santiniketan	IN	412	23.682708	87.6880296
+299	bornaddress	\N	\N	Baltimore MD	US	234	39.2908816	-76.610759
+826	bornaddress	\N	\N	Corteno	IT	852	46.166198	10.243457
+303	bornaddress	\N	\N	Pusan	KR	237	35.1799528	129.0752365
+156	bornaddress	\N	\N	Stainforth	GB	110	54.101956	-2.2749464
+649	bornaddress	\N	\N	Fleräng	SE	639	60.6370727	17.3618155
+832	diedaddress	\N	\N	Needham MA	US	857	31.9868295	-88.33308822
+538	bornaddress	\N	\N	Rosheim	FR	491	48.496421	7.4698832
+224	bornaddress	\N	\N	Bremen	DE	161	53.0758196	8.8071646
+577	bornaddress	\N	\N	West Hartford CT	US	538	41.769858	-72.752718
+65	bornaddress	\N	\N	Neston	GB	40	53.2905172	-3.063792
+635	diedaddress	\N	\N	Montagnola	CH	613	45.9829744	8.9184373
+750	bornaddress	\N	\N	Rangoon (now Yangon)	MM	774	16.774104	96.167159
+578	diedaddress	\N	\N	Waterford CT	US	538	33.3173452	-111.9432008
+806	bornaddress	\N	\N	Bad Salzbrunn	PL	835	50.8066959	16.2540971
+250	bornaddress	\N	\N	Putney VT	US	181	42.9751766	-72.5215973
+496	bornaddress	\N	\N	Middletown CT	US	445	41.531146	-72.644929
+188	organization	\N	\N	Zurich	CH	\N	47.3744489	8.5410422
+777	bornaddress	\N	\N	Beirut	LB	807	33.8959203	35.47843
+666	organization	\N	\N	Innsbruck	AT	\N	47.2654296	11.3927685
+692	bornaddress	\N	\N	Windsor ON	CA	687	42.2858536	-82.9780695
+403	diedaddress	\N	\N	Duarte CA	US	343	34.1394513	-117.9772873
+772	organization	\N	\N	Lisbon	PT	\N	38.7077507	-9.1365919
+646	bornaddress	\N	\N	Potsdam NY	US	631	44.6697996	-74.9813349
+366	bornaddress	\N	\N	Livingston Manor NY	US	306	41.9003667	-74.8282167
+756	diedaddress	\N	\N	Danby VT	US	778	43.3465464	-72.9965342
+788	bornaddress	\N	\N	Trönö	SE	818	61.3961376	16.8337173
+754	diedaddress	\N	\N	Vézelay	FR	777	47.4657306	3.746285
+124	bornaddress	\N	\N	Falmouth KY	US	83	38.6767366	-84.3304592
+835	organization	\N	\N	Bucksburn (Scotland)	GB	\N	57.1771092	-2.1824135
+492	diedaddress	\N	\N	West Berlin	DE	439	52.5512168	13.1788236
+338	diedaddress	\N	\N	Grimstad	NO	273	58.2839967	8.712829119
+354	diedaddress	\N	\N	Bergamo	IT	290	45.6944947	9.6698727
+157	diedaddress	\N	\N	Canterbury	GB	110	51.2800275	1.0802533
+491	diedaddress	\N	\N	Vålådalen	SE	438	63.1485611	12.9667787
+658	bornaddress	\N	\N	Troyes	FR	650	48.2971626	4.0746257
+328	bornaddress	\N	\N	Alice TX	US	263	27.7522487	-98.0697249
+629	bornaddress	\N	\N	Traralgon	AU	605	-38.1946636	146.5381646
+167	diedaddress	\N	\N	Winchester	GB	117	51.0612766	-1.3131692
+56	bornaddress	\N	\N	Salinas CA	US	35	36.6744117	-121.655037
+144	bornaddress	\N	\N	Henan	CN	101	47.9648	126.02
+615	bornaddress	\N	\N	Birmingham	GB	582	52.4796992	-1.9026911
+362	diedaddress	\N	\N	Barbizon	FR	302	48.4447386	2.6064391
+67	diedaddress	\N	\N	Rexburg ID	US	41	43.8235163	-111.787022
+660	bornaddress	\N	\N	Albertville	FR	651	45.6754622	6.3925417
+412	bornaddress	\N	\N	Schickenhof	DE	352	49.6407345	11.9406665
+848	bornaddress	\N	\N	Königshütte (now Chorzów)	PL	878	\N	\N
+696	diedaddress	\N	\N	Alton	GB	690	51.1489036	-0.9757677
+74	organization	\N	\N	Prague	CZ	\N	50.0874654	14.4212535
+122	diedaddress	\N	\N	Winchester MA	US	81	39.1852184	-78.1652404
+729	organization	\N	\N	New Brunswick NJ	US	\N	40.4862174	-74.4518173
+341	bornaddress	\N	\N	Nyeri	KE	280	-0.4192962	36.9517005
+90	bornaddress	\N	\N	Madison WI	US	56	43.074761	-89.3837613
+526	diedaddress	\N	\N	Surfside FL	US	474	25.8784285	-80.1256007
+334	bornaddress	\N	\N	Calcutta	IN	271	22.5726459	88.3638953
+460	bornaddress	\N	\N	Cresco IA	US	404	43.3736148	-92.1161444
+34	organization	\N	\N	Cambridge MA	US	\N	42.3655767	-71.1040018
+332	diedaddress	\N	\N	Stanger	ZA	268	-29.3383782	31.2881205
+865	bornaddress	\N	\N	Alliston	CA	902	46.0544878	-62.62522891
+11	bornaddress	\N	\N	Bristol	GB	6	51.4538022	-2.5972985
+365	diedaddress	\N	\N	Épernay	FR	304	49.042561	3.9528655
+197	diedaddress	\N	\N	College Station TX	US	138	30.6183939	-96.3455991
+190	organization	\N	\N	Berlin-Dahlem	DE	\N	52.4662332	13.2982478
+162	bornaddress	\N	\N	Pongaroa	NZ	113	-40.5428315	176.1922011
+648	diedaddress	\N	\N	Zushi	JP	634	35.3040672	139.5838447
+94	diedaddress	\N	\N	Osaka	JP	59	34.6937569	135.5014539
+457	organization	\N	\N	Graz	AT	\N	47.0708678	15.4382786
+168	organization	\N	\N	Basel	CH	\N	47.5581077	7.5878261
+458	bornaddress	\N	\N	Laibach (now Ljubljana)	SI	401	\N	\N
+520	bornaddress	\N	\N	Sighet	RO	469	47.9283242	23.8915583
+794	bornaddress	\N	\N	Kislovodsk	RU	823	43.9128743	42.7192186
+359	bornaddress	\N	\N	Yamanashi Prefecture	JP	299	35.6399328	138.6380495
+654	bornaddress	\N	\N	Fort Worth TX	US	647	32.753177	-97.3327459
+430	bornaddress	\N	\N	Ivano-Frankivsk	UA	367	48.9224763	24.710334
+276	bornaddress	\N	\N	Elizabeth NJ	US	210	40.6639916	-74.2107006
+762	bornaddress	\N	\N	Mürzzuschlag	AT	792	47.6053538	15.6723805
+448	bornaddress	\N	\N	Shanghai	CN	391	31.2323437	121.4691024
+815	organization	\N	\N	Beckenham	GB	\N	51.4070938	-0.0303183
+146	bornaddress	\N	\N	Genoa	IT	103	44.40726	8.9338624
+130	organization	\N	\N	Princeton NJ	US	\N	40.3496953	-74.6597376
+26	organization	\N	\N	New Haven CT	US	\N	41.308659	-72.925298
+640	diedaddress	\N	\N	Lexington MA	US	624	42.4473175	-71.2245003
+700	diedaddress	\N	\N	Saco ME	US	698	43.5009176	-70.4428286
+896	bornaddress	\N	\N	Montclair NJ	US	944	40.841757	-74.201489
+118	bornaddress	\N	\N	Monessen PA	US	78	40.1484053	-79.8878254
+620	organization	\N	\N	Bloomington IN	US	\N	39.1670396	-86.5342881
+901	bornaddress	\N	\N	Plzen	CZ	949	49.7477415	13.3775249
+893	bornaddress	\N	\N	Duluth MN	US	941	46.7729322	-92.1251218
+719	bornaddress	\N	\N	Ganzhou	CN	722	25.8332103	114.9287362
+674	bornaddress	\N	\N	Saratov	RU	666	51.530018	46.034683
+399	bornaddress	\N	\N	Hume IL	US	339	39.7967015	-87.8686414
+85	bornaddress	\N	\N	Savur	TR	51	37.5368396	40.8873746
+245	diedaddress	\N	\N	Cannes	FR	175	43.5515198	7.0134418
+834	bornaddress	\N	\N	Germiston	ZA	859	-26.229444	28.180556
+21	bornaddress	\N	\N	Mårbacka	SE	12	57.9763896	15.2595293
+82	bornaddress	\N	\N	Charleston SC	US	50	32.7884363	-79.9399309
+246	diedaddress	\N	\N	Oyster Bay NY	US	176	40.7696568	-73.49986084
+631	bornaddress	\N	\N	Lille	FR	607	50.6365654	3.0635282
+539	organization	\N	\N	Vancouver	CA	\N	49.2608724	-123.113952
+288	bornaddress	\N	\N	Brisbane	AU	222	-27.4689682	153.0234991
+397	bornaddress	\N	\N	Rouen	FR	338	49.4404591	1.0939658
+142	organization	\N	\N	Geneva	CH	\N	46.2017559	6.1466014
+494	bornaddress	\N	\N	Syracuse NY	US	443	43.0481221	-76.1474244
+582	bornaddress	\N	\N	Gaomi	CN	545	36.3654065	119.8005385
+554	diedaddress	\N	\N	Bourne	GB	509	52.7682345	-0.3771579
+262	bornaddress	\N	\N	Wels	AT	196	48.1565472	14.0243752
+452	bornaddress	\N	\N	Bergen	NO	393	60.3943055	5.3259192
+583	bornaddress	\N	\N	Berne IN	US	547	40.6578242	-84.9519115
+324	diedaddress	\N	\N	Llangarron	GB	260	51.8861918	-2.6829994
+30	organization	\N	\N	Chicago IL	US	\N	41.8755616	-87.6244212
+14	bornaddress	\N	\N	Ashland NH	US	7	43.69568	-71.630859
+632	diedaddress	\N	\N	Shipston-on-Stour	GB	610	52.0630181	-1.6247264
+66	organization	\N	\N	Batavia IL	US	\N	41.8500284	-88.3125738
+828	bornaddress	\N	\N	Lexington KY	US	854	38.0464066	-84.4970393
+76	diedaddress	\N	\N	Bad Homburg vor der Höhe	DE	47	50.2267699	8.6169093
+804	bornaddress	\N	\N	Qunu	ZA	832	-31.795771	28.614906
+892	bornaddress	\N	\N	Ramelton	IE	940	55.0369966	-7.6520672
+760	organization	\N	\N	Harlow	GB	\N	51.7676194	0.0974893
+530	bornaddress	\N	\N	Bukavu	CD	480	-2.5055839	28.8594885
+87	organization	\N	\N	Walnut Creek CA	US	\N	37.9020731	-122.0618702
+677	diedaddress	\N	\N	Saint-Cyr-sur-Loire	FR	671	47.4052448	0.6658199
+154	organization	\N	\N	Jerusalem	IL	\N	31.7788242	35.2257626
+656	diedaddress	\N	\N	Indianapolis IN	US	648	39.7683331	-86.1583502
+502	diedaddress	\N	\N	Lafayette CA	US	450	37.8857582	-122.1180201
+481	bornaddress	\N	\N	Waltersdorf (now Niegoslawice)	PL	431	\N	\N
+254	diedaddress	\N	\N	Byhalia MS	US	183	34.8772655	-89.6872225
+45	bornaddress	\N	\N	Cherbourg	FR	27	49.6425343	-1.6249565
+711	diedaddress	\N	\N	Ascona	CH	712	46.1554222	8.7707865
+637	bornaddress	\N	\N	Willesden	GB	618	51.5466216	-0.2358661
+132	diedaddress	\N	\N	New Jersey NJ	US	88	40.0155412	-74.8280828
+758	bornaddress	\N	\N	Jefferson City MO	US	782	38.577359	-92.1724265
+5	organization	\N	\N	Göttingen	DE	\N	51.5328328	9.9351811
+54	bornaddress	\N	\N	Johannesburg	ZA	34	-26.205	28.049722
+52	bornaddress	\N	\N	Sidney OH	US	31	40.284241	-84.1555267
+802	bornaddress	\N	\N	Uniontown PA	US	830	39.900076	-79.7164326
+477	bornaddress	\N	\N	Novaya Chigla	RU	425	51.221802	40.480701
+595	organization	\N	\N	Nedlands	AU	\N	-31.9799209	115.8057167
+269	bornaddress	\N	\N	Ulm	DE	202	48.3974003	9.9934336
+576	bornaddress	\N	\N	Thorshavn	DK	536	\N	\N
+252	diedaddress	\N	\N	Lillehammer	NO	182	61.1333408	10.42658554
+141	bornaddress	\N	\N	Rymanow	PL	99	49.576131	21.8676433
+137	organization	\N	\N	Worcester MA	US	\N	42.2625621	-71.8018877
+113	diedaddress	\N	\N	Brighton	GB	73	50.8214626	-0.1400561
+241	bornaddress	\N	\N	Northampton	GB	173	52.2378853	-0.8963639
+192	diedaddress	\N	\N	Locarno	CH	134	46.1695739	8.7954859
+229	diedaddress	\N	\N	Rehovot	IL	165	31.8952532	34.8105616
+864	diedaddress	\N	\N	Putney Heath	GB	901	51.4407022	-0.2348616183
+268	diedaddress	\N	\N	Tromsø	NO	201	69.6516345	18.9558585
+461	bornaddress	\N	\N	Modica	IT	407	36.8589209	14.7613018
+830	bornaddress	\N	\N	Koenigsberg (now Kaliningrad)	RU	856	\N	\N
+198	organization	\N	\N	Los Angeles CA	US	\N	34.0536909	-118.242766
+422	bornaddress	\N	\N	Todmorden	GB	361	53.7137251	-2.097753
+243	bornaddress	\N	\N	Neisse (now Nysa)	PL	174	51.9555466	14.7208773
+222	bornaddress	\N	\N	Pretoria	ZA	157	-25.7459277	28.1879101
+183	diedaddress	\N	\N	Branford CT	US	129	41.30981345	-72.92990737
+29	bornaddress	\N	\N	Bogotá	CO	17	4.6529539	-74.0835643
+308	bornaddress	\N	\N	Vladivostok	RU	240	43.1150678	131.8855768
+204	bornaddress	\N	\N	Langford Grove Maldon Essex	GB	142	51.7311	0.67463
+358	bornaddress	\N	\N	Newcastle upon Tyne	GB	298	54.9738474	-1.6131572
+258	diedaddress	\N	\N	Lafayette IN	US	189	40.4191229	-86.8919011
+455	bornaddress	\N	\N	Karcag	HU	397	47.314646	20.9240941
+732	bornaddress	\N	\N	Tivoli	IT	739	41.960922	12.798884
+31	bornaddress	\N	\N	East Orange NJ	US	18	40.767323	-74.2048677
+49	organization	\N	\N	Oxford	GB	\N	51.7520131	-1.2578499
+327	organization	\N	\N	San Francisco CA	US	\N	37.7790262	-122.419906
+247	bornaddress	\N	\N	Jamaica Plain MA (now Boston MA)	US	178	42.305915	-71.119164
+604	bornaddress	\N	\N	Kattowitz (now Katowice)	PL	569	\N	\N
+375	organization	\N	\N	Mülheim an der Ruhr	DE	\N	51.4272925	6.8829192
+601	bornaddress	\N	\N	Buchs	CH	564	47.3910322	8.0692413
+808	diedaddress	\N	\N	Peredelkino	RU	836	55.6562911	37.3556338
+771	diedaddress	\N	\N	Knokke	BE	801	51.3464863	3.2876314
+891	organization	\N	\N	Madison NJ	US	\N	40.7598227	-74.417097
+23	diedaddress	\N	\N	Helsinki	FI	13	60.1674881	24.9427473
+573	bornaddress	\N	\N	Lorenzkirch	DE	531	51.3534695	13.2479165
+265	diedaddress	\N	\N	Burgberg	DE	198	48.5813154	10.25707571
+108	diedaddress	\N	\N	Ocho Rios	JM	68	18.4081045	-77.1011092
+71	diedaddress	\N	\N	Muskau	DE	43	51.5470046	14.7215146
+867	bornaddress	\N	\N	Zamora	MX	908	19.9828948	-102.28363
+128	bornaddress	\N	\N	Moscow	RU	86	55.7505412	37.6174782
+845	diedaddress	\N	\N	Bilthoven	NL	875	52.1289693	5.2046134
+180	diedaddress	\N	\N	Belmont MA	US	127	37.5164926	-122.2941914
+476	diedaddress	\N	\N	Kyoto	JP	424	35.021041	135.7556075
+278	bornaddress	\N	\N	Nam Ha province	VN	212	18.3358904	105.9003199
+343	bornaddress	\N	\N	Pressburg (now Bratislava)	SK	281	48.100521	17.113292
+837	organization	\N	\N	Bodmin	GB	\N	50.470725	-4.7243205
+86	bornaddress	\N	\N	Beshasha	ET	52	7.7958639	36.4770633
+185	bornaddress	\N	\N	Gorizia	IT	131	45.9451611	13.625261
+3	organization	\N	\N	Stanford CA	US	\N	37.4265407	-122.1703055
+844	bornaddress	\N	\N	Waalwijk	NL	875	51.68733715	5.01730794
+625	bornaddress	\N	\N	Jena	DE	598	50.9281717	11.5879359
+488	bornaddress	\N	\N	Kingston Hill	GB	436	50.6167132	-2.0619012
+866	diedaddress	\N	\N	Newfoundland	CA	902	49.12120935	-56.64031114
+53	bornaddress	\N	\N	Bayonne	FR	33	43.4945144	-1.4736657
+129	bornaddress	\N	\N	Klerksdorp	ZA	87	-26.8625383	26.6656814
+283	organization	\N	\N	Greenwich CT	US	\N	41.024794	-73.631449
+780	organization	\N	\N	Tempe AZ	US	\N	33.4255117	-111.9400164
+462	diedaddress	\N	\N	Naples	IT	407	40.8358846	14.2487679
+181	bornaddress	\N	\N	Yakima WA	US	128	46.601557	-120.510842
+885	bornaddress	\N	\N	Atherton	AU	932	-17.2674058	145.4761663
+725	bornaddress	\N	\N	Casablanca	MA	732	33.5945144	-7.6200284
+497	organization	\N	\N	Gaithersburg MD	US	\N	39.1399187	-77.1929215
+633	bornaddress	\N	\N	Zloczov	UA	611	\N	\N
+465	diedaddress	\N	\N	Freiburg	DE	410	47.9960901	7.8494005
+490	bornaddress	\N	\N	Klippan	SE	438	56.1340267	13.1332245
+353	bornaddress	\N	\N	Imperia	IT	290	43.8861996	8.0285359
+173	diedaddress	\N	\N	Ndola	ZM	120	-12.9693056	28.6365894
+220	organization	\N	\N	Dallas TX	US	\N	32.7762719	-96.7968559
+234	diedaddress	\N	\N	Siena	IT	168	43.3185536	11.3316533
+809	bornaddress	\N	\N	Masterton	NZ	837	-40.9495524	175.6594413
+298	organization	\N	\N	Haifa	IL	\N	32.8191218	34.9983856
+210	bornaddress	\N	\N	Taylorville IL	US	147	39.5487452	-89.2941549
+610	organization	\N	\N	Waltham MA	US	\N	42.3756401	-71.2358004
+706	bornaddress	\N	\N	Merriman NE	US	707	42.919783	-101.7004407
+442	diedaddress	\N	\N	Lanzarote	ES	380	28.0379237	-15.5801718
+740	diedaddress	\N	\N	Ayot St. Lawrence	GB	758	51.83509665	-0.2580284427
+505	bornaddress	\N	\N	Rendcombe	GB	452	51.7859976	-1.9723485
+846	diedaddress	\N	\N	High Wycombe	GB	876	51.6317449	-0.75596
+345	organization	\N	\N	Groningen	NL	\N	53.2190652	6.5680077
+178	diedaddress	\N	\N	Lübeck	DE	126	53.866444	10.684738
+686	bornaddress	\N	\N	Damanhur	EG	681	31.0374982	30.4710625
+618	diedaddress	\N	\N	Blockley	GB	589	52.02239065	-1.740822134
+10	organization	\N	\N	London	GB	\N	51.5073359	-0.12765
+337	bornaddress	\N	\N	Lom	NO	273	61.7142578	8.425897734
+373	bornaddress	\N	\N	Norwalk CT	US	311	32.9754015	-117.0390357
+15	organization	\N	\N	Canberra	AU	\N	-35.2975906	149.1012676
+534	organization	\N	\N	Waterloo	CA	\N	43.4652699	-80.5222961
+370	diedaddress	\N	\N	Bridgetown	BB	309	13.0977832	-59.6184184
+275	bornaddress	\N	\N	Harborne	GB	209	52.4595363	-1.9503355
+533	bornaddress	\N	\N	Barger-Compascuum	NL	484	52.754792	7.042117
+571	bornaddress	\N	\N	Lahore	PK	530	31.5656822	74.3141829
+509	organization	\N	\N	Sèvres	FR	\N	48.8247407	2.2127083
+616	bornaddress	\N	\N	Guatemala City	GT	588	14.6424667	-90.5131361
+584	bornaddress	\N	\N	Siegen	DE	548	50.8749804	8.0227233
+300	diedaddress	\N	\N	Los Gatos CA	US	235	37.226611	-121.9746797
+427	bornaddress	\N	\N	Akron OH	US	364	41.083064	-81.518485
+253	bornaddress	\N	\N	New Albany MS	US	183	40.08403005	-82.81330686
+863	bornaddress	\N	\N	Almora	IN	901	29.601699	79.6632635
+207	organization	\N	\N	Lidingö Stockholm	SE	\N	59.3669445	18.1820897
+440	diedaddress	\N	\N	Perranarworthal	GB	379	50.2086447	-5.1164014
+92	bornaddress	\N	\N	Amoy	CN	57	24.4801069	118.0853479
+148	organization	\N	\N	Richmond VA	US	\N	37.5385087	-77.43428
+736	bornaddress	\N	\N	Nagasaki	JP	750	32.7501611	129.8781002
+881	diedaddress	\N	\N	Coral Gables FL	US	927	25.72149	-80.2683838
+811	bornaddress	\N	\N	Chabris	FR	838	47.2527118	1.6514258
+548	bornaddress	\N	\N	Clausthal (now Clausthal-Zellerfeld)	DE	503	51.808347	10.340169
+88	bornaddress	\N	\N	Pasadena CA	US	54	34.1476507	-118.1441551
+330	bornaddress	\N	\N	Kristiania (now Oslo)	NO	267	\N	\N
+314	bornaddress	\N	\N	Nice	FR	248	43.7009358	7.2683912
+4	bornaddress	\N	\N	Little Falls MN	US	2	45.9763545	-94.3625024
+13	organization	\N	\N	Rochester NY	US	\N	43.157285	-77.615214
+413	diedaddress	\N	\N	Traunstein	DE	352	47.8701474	12.6423403
+59	bornaddress	\N	\N	Pinsk	BY	37	52.1113862	26.1025274
+99	organization	\N	\N	Bern	CH	\N	46.9484742	7.4521749
+561	bornaddress	\N	\N	Swanage	GB	518	50.6086976	-1.9571971
+402	bornaddress	\N	\N	Possum Trot KY	US	343	37.0056129	-88.4305964
+624	bornaddress	\N	\N	Raton NM	US	596	36.8979234	-104.4354816
+416	bornaddress	\N	\N	Houston TX	US	354	29.7589382	-95.3676974
+117	organization	\N	\N	Bethesda MD	US	\N	38.98127255	-77.12335871
+854	bornaddress	\N	\N	Mit Abu al-Kawm	EG	887	30.63627	30.91312
+797	organization	\N	\N	Louvain	BE	\N	50.879202	4.7011675
+664	bornaddress	\N	\N	Mart TX	US	656	31.5423911	-96.8336015
+672	bornaddress	\N	\N	Jhang Maghiāna	PK	664	33.7557	73.16161
+208	bornaddress	\N	\N	Stenstorp	SE	144	58.2713175	13.7133276
+693	diedaddress	\N	\N	Lincoln MA	US	687	40.8088861	-96.7077751
+68	organization	\N	\N	Toulouse	FR	\N	43.6044622	1.4442469
+721	bornaddress	\N	\N	Juvisy-sur-Orge	FR	725	48.6904063	2.373809
+459	bornaddress	\N	\N	Cedarville IL	US	402	42.3759906	-89.6331674
+374	bornaddress	\N	\N	Geneva NE	US	313	40.5257539	-97.6027667
+747	bornaddress	\N	\N	Zelvas	LT	764	\N	\N
+560	bornaddress	\N	\N	Uchiko	JP	517	33.5495987	132.6500056
+593	bornaddress	\N	\N	Iasi	RO	558	47.1615598	27.5837814
+823	diedaddress	\N	\N	Ipswich	GB	849	52.0579324	1.1528095
+790	bornaddress	\N	\N	Aldea Chimel	GT	820	14.5481527	-90.7254798
+605	bornaddress	\N	\N	Usman	RU	570	52.0506929	39.7399996
+231	diedaddress	\N	\N	Kraków	PL	166	50.0619474	19.9368564
+81	organization	\N	\N	Brooklyn NY	US	\N	40.6526006	-73.9497211
+336	diedaddress	\N	\N	Ordrup	DK	272	55.5242231	11.7195196
+274	diedaddress	\N	\N	Twin Falls ID	US	206	42.5704456	-114.4602554
+557	bornaddress	\N	\N	Bombay (now Mumbai)	IN	514	18.913541	72.816588
+441	bornaddress	\N	\N	Azinhaga	PT	380	39.3503597	-8.5281677
+782	diedaddress	\N	\N	Paradise Valley AZ	US	810	33.5324295	-111.9505123
+419	diedaddress	\N	\N	Aberdeen	GB	358	57.1482429	-2.0928095
+189	bornaddress	\N	\N	Mulhouse	FR	133	47.7467233	7.3389937
+899	bornaddress	\N	\N	Stroud	GB	947	51.745424	-2.2198605
+874	diedaddress	\N	\N	Gladwyne PA	US	914	40.0397304	-75.2791788
+602	diedaddress	\N	\N	Wollerau	CH	564	47.1957261	8.7194595
+884	bornaddress	\N	\N	Bradford	GB	930	53.7944229	-1.7519186
+612	bornaddress	\N	\N	Lancashire	GB	577	53.8611703	-2.565088792
+277	diedaddress	\N	\N	Unkel	DE	211	50.5996127	7.2157397
+160	organization	\N	\N	Cleveland OH	US	\N	41.4996574	-81.6936772
+248	bornaddress	\N	\N	Dinant	BE	180	50.2591813	4.9130588
+191	bornaddress	\N	\N	Karlsruhe	DE	134	49.0068705	8.4034195
+886	organization	\N	\N	Yorktown Heights NY	US	\N	41.2709274	-73.7776336
+426	diedaddress	\N	\N	Corona del Mar CA	US	363	33.5995916	-117.8737398
+829	diedaddress	\N	\N	Mulrany	IE	855	53.9071321	-9.7740713
+378	bornaddress	\N	\N	Germantown PA	US	318	40.0434449	-75.1801775
+72	organization	\N	\N	Bar Harbor ME	US	\N	44.3876378	-68.2043361
+123	bornaddress	\N	\N	Lansing IA	US	82	43.3618729	-91.2156721
+315	bornaddress	\N	\N	Arequipa	PE	250	-16.3988667	-71.5369607
+342	diedaddress	\N	\N	Nairobi	KE	280	-1.2832533	36.8172449
+855	bornaddress	\N	\N	Agrigento Sicily	IT	890	37.3122991	13.57465
+295	organization	\N	\N	Brussels	BE	\N	50.8465573	4.351697
+233	bornaddress	\N	\N	Kingston ON	CA	168	44.3054151	-76.4283781
+751	bornaddress	\N	\N	Maillane	FR	775	43.8325251	4.7825111
+540	bornaddress	\N	\N	Blackpool	GB	492	53.8179442	-3.0509812
+697	bornaddress	\N	\N	Northfield MN	US	693	44.4582041	-93.161159
+791	bornaddress	\N	\N	Garding	DE	821	54.3295733	8.7793889
+211	bornaddress	\N	\N	Greenville SC	US	148	34.851354	-82.3984882
+401	bornaddress	\N	\N	Hamadan	IR	342	34.7992888	48.5152464
+764	diedaddress	\N	\N	Orange CA	US	793	33.7872568	-117.850308
+115	diedaddress	\N	\N	Austin TX	US	76	30.2711286	-97.7436995
+839	diedaddress	\N	\N	Annandale VA	US	866	38.838491	-77.20852376
+841	bornaddress	\N	\N	Sumter SC	US	870	33.9204354	-80.3414693
+196	bornaddress	\N	\N	Gravesend	GB	138	51.4424747	0.3694468
+33	bornaddress	\N	\N	New York NY	US	19	40.7127281	-74.0060152
+140	diedaddress	\N	\N	Munich	DE	98	48.1371079	11.5753822
+60	organization	\N	\N	Fairfax VA	US	\N	38.8462236	-77.3063733
+731	diedaddress	\N	\N	Hyannis MA	US	737	41.6534847	-70.2823732
+493	diedaddress	\N	\N	Tucson AZ	US	442	32.2228765	-110.974847
+529	bornaddress	\N	\N	Plains GA	US	478	32.0340872	-84.3926633
+296	bornaddress	\N	\N	Etterbeek	BE	229	50.8361447	4.3861737
+621	organization	\N	\N	Sapporo	JP	\N	43.061936	141.3542924
+537	bornaddress	\N	\N	Worms	DE	489	49.6302618	8.3620898
+206	diedaddress	\N	\N	Rome	IT	143	41.8933203	12.4829321
+673	bornaddress	\N	\N	Dordrecht	NL	665	51.7958812	4.6779351
+271	diedaddress	\N	\N	San Marino CA	US	204	34.1215947	-118.105739
+753	bornaddress	\N	\N	Clamecy	FR	777	49.4286111	3.3619444
+763	bornaddress	\N	\N	Paterson NJ	US	793	40.9167654	-74.171811
+628	bornaddress	\N	\N	Linköping	SE	604	58.4098135	15.6245252
+469	bornaddress	\N	\N	Rio de Janeiro	BR	416	-22.9110137	-43.2093727
+858	bornaddress	\N	\N	Växjö	SE	892	56.8787183	14.8094385
+687	bornaddress	\N	\N	Wloclawek	PL	683	52.66017	19.0722963
+478	bornaddress	\N	\N	Guebwiller	FR	427	47.9094629	7.2113271
+474	organization	\N	\N	Garching	DE	\N	48.2513878	11.6509662
+325	bornaddress	\N	\N	Wisbech Cambridgeshire	GB	262	52.6651733	0.1606824
+424	organization	\N	\N	Irvine CA	US	\N	33.6856969	-117.8259819
+104	bornaddress	\N	\N	Adelaide	AU	66	-34.9281805	138.5999312
+377	bornaddress	\N	\N	Vik	SE	317	57.382993	12.5740246
+286	bornaddress	\N	\N	Milford MA	US	221	41.2222218	-73.0570603
+527	bornaddress	\N	\N	Minnigaff	GB	476	54.9616075	-4.4793821
+138	organization	\N	\N	Leipzig	DE	\N	51.3406321	12.3747329
+644	bornaddress	\N	\N	Chorley	GB	628	53.6531915	-2.6294313
+421	diedaddress	\N	\N	Concord MA	US	359	43.207178	-71.537476
+350	bornaddress	\N	\N	Rufford near Chesterfield	GB	288	53.63375	-2.81662
+588	bornaddress	\N	\N	Sioux City IA	US	555	42.4966815	-96.4058782
+720	bornaddress	\N	\N	Fukuoka	JP	724	33.5898988	130.4017509
+630	diedaddress	\N	\N	Sallanches	FR	606	45.9361246	6.6302551
+852	bornaddress	\N	\N	Kilmaurs	GB	886	55.6383988	-4.5269606
+507	bornaddress	\N	\N	Canton MA	US	457	32.612602	-90.0367512
+842	bornaddress	\N	\N	Bad Kissingen	DE	872	50.1985698	10.0746833
+663	diedaddress	\N	\N	Huntington NY	US	654	40.868154	-73.425676
+111	bornaddress	\N	\N	Rye NY	US	72	40.9808209	-73.684294
+873	bornaddress	\N	\N	Casteldàwson	GB	913	\N	\N
+730	bornaddress	\N	\N	Priluka (now Nova Pryluka)	UA	737	49.36667	28.36667
+807	diedaddress	\N	\N	Agnetendorf (now Jagniatków)	PL	835	\N	\N
+532	bornaddress	\N	\N	Guelph	CA	483	43.5460516	-80.2493276
+657	bornaddress	\N	\N	Nicosia	CY	649	35.1746503	33.3638783
+833	bornaddress	\N	\N	Kumasi	GH	858	6.6985605	-1.6233086
+405	bornaddress	\N	\N	Oakland CA	US	345	37.8044557	-122.271356
+836	bornaddress	\N	\N	Sarajevo	BA	864	43.8519774	18.3866868
+581	bornaddress	\N	\N	Nizhny Tagil	RU	542	57.905149	59.9508466
+531	bornaddress	\N	\N	Kojo	IQ	481	36.179423	41.909093
+103	bornaddress	\N	\N	Lochfield	GB	65	55.8314459	-4.4152067
+722	bornaddress	\N	\N	Gjesdal	NO	727	58.83120885	6.277085088
+862	diedaddress	\N	\N	Stapleford Cambridgeshire	GB	896	52.1458532	0.1504635
+361	bornaddress	\N	\N	Autun	FR	302	46.9510313	4.2989478
+718	diedaddress	\N	\N	Poznan	PL	721	52.4082663	16.9335199
+444	diedaddress	\N	\N	Eugene OR	US	386	44.0505054	-123.0950506
+64	bornaddress	\N	\N	Weimar	DE	39	50.9810486	11.3296637
+710	bornaddress	\N	\N	Frauenfeld	CH	712	47.5561915	8.8963347
+714	bornaddress	\N	\N	Brest Litovsk	BY	716	52.093751	23.6851851
+567	bornaddress	\N	\N	Ålesund	NO	525	62.76712545	6.168828066
+339	bornaddress	\N	\N	Ruse	BG	274	43.8480413	25.9542057
+786	bornaddress	\N	\N	Oceanside NY	US	815	40.6390936	-73.6399765
+55	diedaddress	\N	\N	Cape Town	ZA	34	-33.928992	18.417396
+676	bornaddress	\N	\N	Olympus TN	US	668	47.5266377	-122.1676737
+598	bornaddress	\N	\N	Grand Valley CO	US	561	41.7211706	-79.5375503
+456	bornaddress	\N	\N	Euskirchen	DE	400	50.66129	6.7871681
+709	bornaddress	\N	\N	Hansdorf (now Lawice)	PL	709	\N	\N
+109	diedaddress	\N	\N	Great Barrington MA	US	69	42.1939364	-73.362773
+116	organization	\N	\N	Ottawa	CA	\N	45.4208777	-75.6901106
+667	bornaddress	\N	\N	Peggau	AT	659	47.206807	15.3451254
+36	bornaddress	\N	\N	Örebro	SE	23	59.2747287	15.2151181
+127	bornaddress	\N	\N	Nantes	FR	85	47.2186371	-1.5541362
+195	diedaddress	\N	\N	Big Sur CA	US	137	36.270241	-121.807454
+689	diedaddress	\N	\N	Pomona CA	US	684	34.0553813	-117.7517496
+38	organization	\N	\N	Halle	DE	\N	52.4523605	6.9192787
+319	bornaddress	\N	\N	Leeds	GB	257	53.7974185	-1.5437941
+814	diedaddress	\N	\N	Manila	PH	841	14.5906346	120.9799964
+715	bornaddress	\N	\N	Dolac	BA	717	44.0847656	17.9903455
+281	diedaddress	\N	\N	Warsaw	PL	215	52.2319581	21.0067249
+821	diedaddress	\N	\N	Menlo Park CL	US	846	37.4519671	-122.177992
+827	bornaddress	\N	\N	Soignies	BE	853	50.579203	4.0685604
+333	bornaddress	\N	\N	Heredia	CR	269	9.9981515	-84.1170163
+360	bornaddress	\N	\N	Tramelan	CH	301	47.223677	7.1030216
+887	bornaddress	\N	\N	Batley	GB	935	53.716564	-1.6363856
+27	bornaddress	\N	\N	Champaign IL	US	15	40.104535	-88.272157
+572	organization	\N	\N	Bonn	DE	\N	50.735851	7.10066
+860	bornaddress	\N	\N	Iráklion	GR	894	35.33908	25.1332843
+900	organization	\N	\N	Jülich	DE	\N	50.9220931	6.3611015
+556	bornaddress	\N	\N	Staunton VA	US	513	38.1495947	-79.072557
+506	bornaddress	\N	\N	Nara	JP	455	34.6845445	135.8048359
+671	organization	\N	\N	Trieste	IT	\N	45.6496485	13.7772781
+285	organization	\N	\N	Research Triangle Park NC	US	\N	35.8923773	-78.86588989
+291	diedaddress	\N	\N	Syosset NY	US	224	40.8262101	-73.502068
+363	bornaddress	\N	\N	Ostend	BE	303	51.2258565	2.919496
+723	organization	\N	\N	Weston Creek	AU	\N	-35.343397	149.0477964
+470	bornaddress	\N	\N	Halifax Nova Scotia	CA	417	44.648618	-63.5859487
+803	bornaddress	\N	\N	Uskup (now Skopje)	MK	831	\N	\N
+272	bornaddress	\N	\N	Blankenburg	DE	205	51.2031236	10.7476184
+223	diedaddress	\N	\N	Heiden	CH	158	47.4421715	9.532089
+796	bornaddress	\N	\N	Svartbjörnsbyn	SE	824	65.8470216	21.7031274
+499	bornaddress	\N	\N	Newburyport MA	US	448	42.8125913	-70.8772751
+101	bornaddress	\N	\N	Hanover	DE	64	52.3744779	9.7385532
+799	bornaddress	\N	\N	Thames Ditton	GB	827	51.389182	-0.3290769
+230	bornaddress	\N	\N	Śeteniai	LT	166	55.3964342	24.0353929
+825	organization	\N	\N	Pavia	IT	\N	45.1860043	9.1546375
+305	bornaddress	\N	\N	Winterthur	CH	238	47.4991723	8.7291498
+890	bornaddress	\N	\N	Vidisha	IN	939	23.5208128	77.8063184
+392	bornaddress	\N	\N	Holbeach	GB	332	52.80421	0.0180043
+547	bornaddress	\N	\N	Wilno (now Vilnius)	LT	500	\N	\N
+255	bornaddress	\N	\N	Arlington SD	US	184	44.364413	-97.133121
+215	bornaddress	\N	\N	Wichita KS	US	151	37.6922361	-97.3375448
+748	bornaddress	\N	\N	Riga	LV	770	56.9493977	24.1051846
+546	organization	\N	\N	New Orleans LA	US	\N	29.9759983	-90.0782127
+805	bornaddress	\N	\N	Vishneva	BY	834	\N	\N
+121	organization	\N	\N	Medford MA	US	\N	42.4184296	-71.1061639
+225	bornaddress	\N	\N	Val di Castello	IT	163	46.503456	10.675307
+165	bornaddress	\N	\N	Winnipeg	CA	116	49.8955367	-97.1384584
+317	organization	\N	\N	Beijing	CN	\N	39.9057136	116.3912972
+175	bornaddress	\N	\N	Madrid	ES	123	40.4167047	-3.7035825
+466	bornaddress	\N	\N	Victoria BC	CA	411	48.4283182	-123.3649533
+510	bornaddress	\N	\N	Fleurier	CH	459	46.904275	6.58004
+395	diedaddress	\N	\N	Oak Lawn IL	US	337	41.7108662	-87.7581081
+611	bornaddress	\N	\N	Kansas City MO	US	576	39.100105	-94.5781416
+205	bornaddress	\N	\N	Bologna	IT	143	44.4938203	11.3426327
+51	organization	\N	\N	Urbana IL	US	\N	40.1117174	-88.207301
+420	bornaddress	\N	\N	Raipur	IN	359	21.2380912	81.6336993
+798	bornaddress	\N	\N	Longlier	BE	826	49.8562222	5.4609005
+609	bornaddress	\N	\N	Burnham-on-Sea	GB	575	51.2377356	-2.998695
+382	bornaddress	\N	\N	Lenoir NC	US	323	35.9140196	-81.5389849
+236	bornaddress	\N	\N	Petilla de Aragón	ES	170	42.461519	-1.0925498
+467	diedaddress	\N	\N	Harrison NY	US	411	40.9689871	-73.71263
+232	bornaddress	\N	\N	Calais	FR	167	50.9524769	1.8538446
+98	bornaddress	\N	\N	Sydney	CA	62	46.137977	-60.194092
+779	diedaddress	\N	\N	Deerfield MA	US	809	42.5442595	-72.6044771
+218	bornaddress	\N	\N	Albuquerque NM	US	153	35.0841034	-106.650985
+508	diedaddress	\N	\N	Buffalo NY	US	457	42.8867166	-78.8783922
+840	organization	\N	\N	Martinsried	DE	\N	48.10882	11.4508007
+518	diedaddress	\N	\N	Thieuloy-Saint-Antoine	FR	466	49.633719	1.9461391
+568	bornaddress	\N	\N	Kobe	JP	526	34.6932379	135.1943764
+528	bornaddress	\N	\N	Toyama City	JP	477	36.7067505	137.2140557
+559	diedaddress	\N	\N	Penrhyndeudraeth	GB	516	52.9300385	-4.0668694
+93	bornaddress	\N	\N	Tokyo	JP	59	35.6840574	139.7744912
+850	bornaddress	\N	\N	Cardiff	GB	884	51.4816546	-3.1791934
+77	organization	\N	\N	Copenhagen	DK	\N	55.6867243	12.5700724
+519	diedaddress	\N	\N	Tunbridge Wells	GB	467	51.1371483	0.2673446
+784	bornaddress	\N	\N	Verona	IT	812	45.4384958	10.9924122
+789	bornaddress	\N	\N	Taktser	CN	819	36.3781555	101.8652258
+408	bornaddress	\N	\N	Wilkes-Barre PA	US	348	41.2464824	-75.8817316
+745	diedaddress	\N	\N	Athens	GR	761	37.9755648	23.7348324
+261	organization	\N	\N	Strasbourg	FR	\N	48.584614	7.7507127
+391	bornaddress	\N	\N	Geldrop	NL	331	51.4226684	5.5607546
+843	bornaddress	\N	\N	Den Helder	NL	874	52.957976	4.760279
+367	bornaddress	\N	\N	Toronto	CA	307	43.6534817	-79.3839347
+669	diedaddress	\N	\N	Charlottesville VA	US	660	38.029306	-78.4766781
+599	bornaddress	\N	\N	Helsa	DE	562	51.2447892	9.6727072
+390	bornaddress	\N	\N	Tel Aviv	IL	329	32.0852997	34.7818064
 \.
 
 

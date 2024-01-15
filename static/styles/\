@@ -1,38 +1,33 @@
 body, legend {
   font-family:  sans-serif;
-  overflow:  hidden;
 }
 
 h3 {
-  position: absolute;
-  top: 30px;
-  left: 50px;
   text-transform: uppercase;
 }
 
+#grid {
+  display: grid;
+  grid-template:
+    "a b b b";
+}
+
+#charts
+  grid-area: 'b';
+  padding-top: 1em;
+}
 
 #map {
-  height: 1434px;
-  width: 2560px;
-  position: absolute;
-  top: 0;
-  left: 0;
+  height: 1000px;
 }
 
 #barchart, #barchart2 {
   display: block;
-  position: absolute;
-  top: 650px;
-  left: 110px;
-  width: 2000px;
-  height: 500px;
+  width: 400px;
+  height: 350px;
 }
 
-#selectList {
-  display: block;
-  position: absolute;
-  left: 2000px;
-  top: 0;
+#filters {
   min-width: 400px;
   grid-area: 'a';
   padding: 1rem 1rem;
@@ -87,11 +82,11 @@ h3 {
 
 #selectList label {
   display: block;
-  width: 50px;
-  height: 37px;
+  width: 51px;
+  height: 40px;
   float: left;
-  border: 3px solid white;
   margin: .2em .2em 0 0;
+
 }
 
 #selectList  input[type=checkbox]:checked + label {
@@ -100,8 +95,8 @@ h3 {
 
 #selectList input[type=checkbox]:checked + label span.checkmark {
   display: inline-block;
-  width: 50px;
-  height: 40px;
+  width: 47px;
+  height: 36px;
   border:0;
   position:relative;
   backdrop-filter: contrast(30%);
